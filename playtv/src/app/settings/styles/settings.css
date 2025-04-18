@@ -1,0 +1,284 @@
+/* Global settings styles */
+.settings-ACC {
+    background-color: var(--variable-collection-backgorund);
+    min-height: 100vh;
+  }
+  
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #07131c;
+    color: white;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .logo a {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+  }
+  
+  .main-nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: #172630;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .search-box input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    outline: none;
+  }
+  
+  .notification-btn,
+  .profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .main-content {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .account-settings {
+    flex: 1;
+    color: white;
+  }
+  
+  .account-settings h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .account-settings h3 {
+    font-size: 22px;
+    margin: 15px 0;
+  }
+  
+  .account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #172630;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+  
+  .info-item span,
+  .info-item a {
+    font-family: "League Spartan-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .info-item:hover a {
+    color: #02bcb5;
+    cursor: pointer;
+  }
+  
+  .info-item:hover {
+    border: 2px solid #02bcb5;
+  }
+  
+  /* Popup styles */
+  .popup {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background: #07131c;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    color: white;
+  }
+  
+  .popup-content input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #838383;
+    border-radius: 5px;
+    background-color: #172630;
+    color: white;
+  }
+  
+  .popup-content button {
+    background: #02bcb5;
+    color: white;
+    width: 90%;
+    margin: 20px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 16px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9em;
+  }
+  
+  #close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    width: 301px;
+    background-color: var(--variable-collection-backgorund);
+    padding: 10px;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: "League Spartan-Regular", Helvetica;
+    font-size: 24px;
+  }
+  
+  .sidebar nav ul li a:hover {
+    background-color: #172630;
+  }
+  
+  .sidebar nav ul li .active {
+    background-color: #172630;
+    border-left: 4px solid #02bcb5;
+    color: #02bcb5;
+  }
+  
+  #logout {
+    color: #d33232;
+  }
+  
+  /* Toggle switch */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #02bcb5;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #02bcb5;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
