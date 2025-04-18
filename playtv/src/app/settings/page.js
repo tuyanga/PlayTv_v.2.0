@@ -1,5 +1,5 @@
-import PasswordChange from './components/PasswordChange';
-import PhoneChange from './components/PhoneChange';
+import PasswordChange from "./component/PasswordChange";
+import PhoneChange from "./component/PhoneChange";
 
 export default function AccountSettings() {
   return (

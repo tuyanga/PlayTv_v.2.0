@@ -1,3 +1,4 @@
+import SettingsSidebar from "./component/SettingsSidebar";
 export default function SettingsLayout({ children }) {
     return (
       <div className="settings-ACC">
