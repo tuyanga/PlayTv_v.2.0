@@ -1,3 +1,4 @@
+import '../styles/settings.css'
 export default function PaymentPage() {
     return (
       <section className="account-settings">

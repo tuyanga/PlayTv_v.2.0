@@ -1,6 +1,6 @@
 import PasswordChange from "./component/PasswordChange";
 import PhoneChange from "./component/PhoneChange";
-
+import './styles/settings.css'
 export default function AccountSettings() {
   return (
     <section className="account-settings">

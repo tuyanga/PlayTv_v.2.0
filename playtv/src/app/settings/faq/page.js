@@ -1,3 +1,4 @@
+import '../styles/settings.css'
 export default function FAQPage() {
     return (
       <section className="account-settings">
