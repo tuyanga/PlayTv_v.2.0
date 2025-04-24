@@ -19,7 +19,7 @@ export default function Header() {
                             <ul className={styles.navList}>
                                 <li className={styles.navItem}><Link href = "#">Нүүр</Link></li>
                                 <li className={styles.navItem}><Link href = "#">BOX</Link></li>
-                                <li className={styles.navItem}><Link href = "#">Миний жагсаалт</Link></li>
+                                <button onClick={() => handleNavigation('/favorite')}><li className={styles.navItem}><Link href = "#">Миний жагсаалт</Link></li></button>
                             </ul>
                     </div>
                 <div className={styles.headerRightContainer}>

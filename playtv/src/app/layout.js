@@ -2,6 +2,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "./components/header.js";
+import { FavoritesProvider } from './context/FavoritesContext';
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header/>
+        <FavoritesProvider>
         {children}
+        </FavoritesProvider>
       </body>
     </html>
   );

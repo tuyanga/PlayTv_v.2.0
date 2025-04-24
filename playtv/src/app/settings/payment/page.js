@@ -1,5 +1,6 @@
 import '../styles/settings.css'
 import PaymentPopup from "../component/PaymentPopup";
+import PaymentHistory from "../component/PaymentHistory";
 export default function PaymentPage() {
     return (
       <section className="account-settings">
@@ -20,10 +21,7 @@ export default function PaymentPage() {
   
         <h3>Жагсаалт</h3>
         <div className="account-info">
-          <div className="info-item">
-            <span>Төлбөрийн жагсаалт</span>
-            <a href="#">харах</a>
-          </div>
+        <PaymentHistory />
         </div>
       </section>
     );

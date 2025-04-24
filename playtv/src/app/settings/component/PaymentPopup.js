@@ -9,13 +9,10 @@ export default function PaymentPopup() {
 
   return (
     <>
-      {/* Popup Trigger - Add this to your payment page */}
       <div className="info-item">
         <span>Идэвхтэй багц байхгүй</span>
         <a onClick={() => setShowPopup(true)}>Өөрчлөх</a>
       </div>
-
-      {/* Popup Content */}
       {showPopup && (
         <div className="popup" onClick={() => setShowPopup(false)}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
