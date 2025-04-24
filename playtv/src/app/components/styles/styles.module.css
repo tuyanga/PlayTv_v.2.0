@@ -1,0 +1,386 @@
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    font-family: "League Spartan", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  
+  .logo a{
+    text-decoration: none;
+    color: #02BCB5;
+  }
+  
+  .myHeader{
+    background: #121212;
+    min-width: 100%;
+    opacity: 65%;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .mainHeaderContainer{
+    display: flex;
+    align-items: center;    
+    justify-content: space-between;
+  }
+  
+  .headerRightContainer{
+    align-items: center;
+  }
+  
+  .headerLeftContainer{
+    display: flex;
+    gap: 37px;
+    align-items: center;
+  }
+  
+  .navList{
+    display: flex;
+    list-style: none;
+    gap: 24px;
+  }
+  
+  .navItem a{
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    color: #B3B3B3;
+  }
+  
+  .navItem a:hover {
+    color: #FDFDFF; 
+  }
+  
+  .userActions{
+    gap: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .userActions button {
+    background: none;
+    border: none;
+    color: #B3B3B3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .userActions button:hover {
+    color: #FDFDFF;
+  }
+  
+  .searchBox {
+    position: relative;
+    transition: width 0.3s ease;
+    margin-right: 15px;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .searchBox.active {
+    width: 200px;
+    cursor: auto;
+    overflow: visible;
+  }
+  
+  .searchBox input {
+    background-color: #0a0a0a;
+    color: #fff;
+    border: none;
+    padding: 8px 35px 8px 35px;
+    border-radius: 25px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease, padding 0.3s ease;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+  }
+  
+  .searchBox.active input {
+    opacity: 1;
+  }
+  
+  .searchBox .fa-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #B3B3B3;
+    z-index: 1;
+    font-size: 1.5rem;
+    left: 10px;
+    transition: color 0.3s;
+  }
+  
+  .searchBox.active .fa-search {
+    color: #FDFDFF;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+          max-width: 768px; 
+      }
+  
+      .logo {
+          font-family: "League Spartan", sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+      }
+      
+      .myheader{
+          min-width: 100%;
+          padding: 1rem 1rem;
+      }
+      
+      .headerLeftContainer{
+          gap: 15px;
+      }
+      
+      .navList{
+          gap: 10px;
+      }
+      
+      .navItem a{
+          font-size: 14px;
+      }
+      .userActions{
+          gap: 3px;
+      }
+      
+      .userActions button {
+          font-size: 0.9rem;
+          padding: 3px;
+      }
+    
+  }
+
+.slideContainer{
+    align-items: center;
+    min-width: 85%;
+    position: relative;
+    overflow: hidden;
+}
+.slideTitle{
+    display: flex;
+    margin-top: 3rem;
+    font-weight: 600;
+    font-size: 2rem;
+    color:#FDFDFF;
+}
+.movieListContainer{
+    display: flex;
+    gap: 0.9rem;
+    scroll-behavior: smooth;
+    scroll-snap-align: start;
+    scroll-snap-type: x mandatory;
+    padding: 10px;
+    width: max-content;
+    -webkit-overflow-scrolling: touch;
+    transition: transform 0.5s ease-in-out;
+}
+
+.movieCard{
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 0.5rem;
+    width: 14rem;
+    height: 21rem;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background: center/cover;
+    z-index: 0;
+}
+.movieCard:hover::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.1), rgba(18, 18, 18, 0.8));
+    z-index: -1;
+}
+
+.movieCard:hover .cardContentContainer{
+    opacity: 1;
+}
+
+.cardContentContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 200px;
+    opacity: 0;
+    z-index: 10;
+    transition: 0.2s ease-in;
+}
+
+.cardContentContainer button{
+    position: relative;
+    left: 80px;
+    margin-top: 15px;
+}
+
+.cardContent{
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cardTitle{
+    color: #FDFDFF;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.cardDescription{
+    display: flex;
+    gap: 60px;
+    flex-direction: row;
+}
+
+.cardDescription h6{
+    color: #B3B3B3;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.btnAddCard{
+    cursor: pointer;
+    background-color: rgba(18, 18, 18, 0.65); 
+    color: #B3B3B3;
+    border: none;
+    border-radius: 50%; 
+    width: 36px; 
+    height: 36px;
+    padding: 0; 
+    justify-content: center; 
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.btnAddCard:hover{
+    color: #FDFDFF;
+}
+
+.sliderRowWrapper {
+    overflow-x: hidden; 
+    position: relative; 
+}
+
+.sliderArrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10; 
+    background: linear-gradient(to left, rgba(18, 18, 18, 1), rgba(102, 102, 102, 0));
+    border: none;
+    color: #fdfdfd;
+    font-size: 3rem; 
+    font-weight: bold;
+    cursor: pointer;
+    padding: 150px 15px; 
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    line-height: 1;
+}
+
+.sliderArrow:hover{
+    opacity: 100;
+}
+
+.nextArrow {
+    right: -10px; 
+}
+.prevArrow {
+    background: linear-gradient(to right, rgba(18, 18, 18, 1), rgba(102, 102, 102, 0));
+}
+
+@media (max-width: 768px) {
+    .slideContainer{
+        min-width: 85%;
+    }
+    .slideTitle{
+        margin-top: 3rem;
+        margin-left: 15px;
+        font-weight: 600;
+        font-size: 1.6rem;
+    }
+    .movieListContainer{
+        gap: 0.6rem;
+        padding: 10px;
+        width: max-content;
+    }
+    
+    .movieCard{
+        width: 8rem;
+        height: 12rem;
+    }
+    
+    .sliderRow {
+        gap: 15px; 
+        padding-bottom: 10px; 
+    }
+    
+    .sliderArrow{
+        font-size: 2rem; 
+        padding: 80px 8px; 
+        border-radius: 4px;
+    }
+
+    .cardContentContainer{
+        gap: 100px;
+    }
+    
+    .cardContentContainer button{
+        left: 40px;
+        margin-top: 15px;
+    }
+    
+    .cardContent{
+        gap: 10px;
+    }
+    
+    .cardTitle{
+        font-size: 0.8rem;
+    }
+    .cardDescription{
+        gap: 45px;
+    }
+    
+    .cardDescription h6{
+        font-size: 0.7rem;
+    }
+    
+    .btnAddCard{
+        border-radius: 50%; 
+        width: 24px; 
+        height: 24px;
+        font-size: 0.8rem;
+    }
+}
