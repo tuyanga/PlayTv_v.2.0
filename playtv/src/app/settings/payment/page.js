@@ -1,14 +1,12 @@
 import '../styles/settings.css'
+import PaymentPopup from "../component/PaymentPopup";
 export default function PaymentPage() {
     return (
       <section className="account-settings">
         <h2>Төлбөрийн хэсэг</h2>
         <h3>Идэвхжүүлсэн багц</h3>
         <div className="account-info">
-          <div className="info-item">
-            <span>Идэвхтэй багц байхгүй</span>
-            <a href="#">Өөрчлөх</a>
-          </div>
+          <PaymentPopup />
           <div className="info-item">
             <span>Автомат сунгалт</span>
             <a href="#">
