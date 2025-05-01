@@ -10,10 +10,11 @@ export default function Slider({title = 'Slider Title'}) {
     const [cardWidth, setCardWidth] = useState(240);
     const [visibleCards, setVisibleCards] = useState(6);
     const [position, setPosition] = useState(0);
+    const [selectedMovie, setSelectedMovie] = useState(null);
     const scrollStep = 3;
 
     useEffect(() => {
-        fetch('/api/slider')
+        fetch('/api/movie/')
             .then(res => res.json())
             .then (data => {
                 setSliderData(data);
@@ -46,6 +47,7 @@ export default function Slider({title = 'Slider Title'}) {
         setPosition((prev) => Math.max(prev - scrollStep, 0));
     };
 
+
     if (sliderData.length === 0) return <p>Loading...</p>
 
     return (
@@ -55,13 +57,8 @@ export default function Slider({title = 'Slider Title'}) {
             <button className = {`${styles.sliderArrow} ${styles.prevArrow}`} onClick={handlePrev}><i className="fas fa-caret-left"></i></button>
                 <div className = {styles.movieListContainer} style={{transform: `translateX(-${position * cardWidth}px)`}}>
                     {sliderData.map((movie, index) => (
-                        <div key={index} ref={index === 0 ? cardRef : null}>
-                            <Card
-                                title = {movie.title}
-                                category = {movie.category}
-                                duration = {movie.duration}
-                                poster = {movie.poster}
-                            />
+                        <div key={movie.id} ref={index === 0 ? cardRef : null}>
+                            <Card movie={movie}/>
                         </div>
                     ))}
                 </div>

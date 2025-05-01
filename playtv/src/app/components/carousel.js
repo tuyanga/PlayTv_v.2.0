@@ -10,7 +10,7 @@ export default function Carousel() {
     const intervalDuration = 5000;
 
     useEffect(() => {
-        fetch('/api/carousel')
+        fetch('/api/featureMovie')
             .then(res => res.json())
             .then (data => {
                 setCarouselData(data);

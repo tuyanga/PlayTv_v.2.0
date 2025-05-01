@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Slider from "./components/slider.js"
-import Carousel from "./components/carousel";
+import Carousel from "./components/carousel.js";
 
 export default function Home() {
   return (

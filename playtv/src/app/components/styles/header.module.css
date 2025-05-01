@@ -1,0 +1,177 @@
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    font-family: "League Spartan", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  
+  .logo a{
+    text-decoration: none;
+    color: #02BCB5;
+  }
+  
+  .myHeader{
+    background: #121212;
+    min-width: 100%;
+    opacity: 65%;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .mainHeaderContainer{
+    display: flex;
+    align-items: center;    
+    justify-content: space-between;
+  }
+  
+  .headerRightContainer{
+    align-items: center;
+  }
+  
+  .headerLeftContainer{
+    display: flex;
+    gap: 37px;
+    align-items: center;
+  }
+  
+  .navList{
+    display: flex;
+    list-style: none;
+    gap: 24px;
+  }
+  
+  .navItem a{
+    text-decoration: none;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    color: #B3B3B3;
+  }
+  
+  .navItem a:hover {
+    color: #FDFDFF; 
+  }
+  
+  .userActions{
+    gap: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .userActions button {
+    background: none;
+    border: none;
+    color: #B3B3B3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .userActions button:hover {
+    color: #FDFDFF;
+  }
+  
+  .searchBox {
+    position: relative;
+    transition: width 0.3s ease;
+    margin-right: 15px;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .searchBox.active {
+    width: 200px;
+    cursor: auto;
+    overflow: visible;
+  }
+  
+  .searchBox input {
+    background-color: #0a0a0a;
+    color: #fff;
+    border: none;
+    padding: 8px 35px 8px 35px;
+    border-radius: 25px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease, padding 0.3s ease;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+  }
+  
+  .searchBox.active input {
+    opacity: 1;
+  }
+  
+  .searchBox .fa-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #B3B3B3;
+    z-index: 1;
+    font-size: 1.5rem;
+    left: 10px;
+    transition: color 0.3s;
+  }
+  
+  .searchBox.active .fa-search {
+    color: #FDFDFF;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+          max-width: 768px; 
+      }
+  
+      .logo {
+          font-family: "League Spartan", sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+      }
+      
+      .myheader{
+          min-width: 100%;
+          padding: 1rem 1rem;
+      }
+      
+      .headerLeftContainer{
+          gap: 15px;
+      }
+      
+      .navList{
+          gap: 10px;
+      }
+      
+      .navItem a{
+          font-size: 14px;
+      }
+      .userActions{
+          gap: 3px;
+      }
+      
+      .userActions button {
+          font-size: 0.9rem;
+          padding: 3px;
+      }
+    
+  }
+

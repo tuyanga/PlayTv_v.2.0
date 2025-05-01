@@ -1,0 +1,120 @@
+.container{
+    margin: auto;
+    padding: 200px 0;
+    display: flex;
+    width: 45%;
+    align-items: center;
+    max-width: 1440px;
+}
+.viewBackground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px) brightness(0.4);
+    z-index: -1;
+}
+.viewCard{
+    width: 345px;
+    height: 400px;
+    border-radius: 14px;
+    background: no-repeat center/cover;
+}
+
+.viewContent{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.viewTitle{
+    font-size: 40px;
+    font-weight: 600;
+    color: #FDFDFF;
+}
+
+.viewInfo{
+    display: flex;
+    align-items: center;
+}
+
+.viewDate{
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-right: 15px;
+}
+
+.viewRating{
+    font-size: 14px;
+    color: #02BCB5;
+}
+
+.viewRating i{
+    margin-right: 2px;
+}
+
+.viewCategory{
+    font-size: 16px;
+    color: #fdfdfd;
+    border-radius: 3px;
+    padding: 4px 8px;
+    background-color: #029E98; 
+}
+
+.viewDescription{
+    text-align: justify;
+    font-size: 20px;
+    font-weight: 300;
+    color: #FDFDFF;
+    
+}
+
+.viewButtonContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btnPlay {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px;
+    background-color: #029E98; 
+    font-size: 1rem;
+    font-weight: bold;
+    color: #FDFDFF;
+}
+
+.btnPlay:hover {
+    background-color: #02BCB5; 
+}
+
+.viewbtnAdd {
+    padding: 10px 25px;
+    border: 2px solid  #029E98; 
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FDFDFF;
+}
+
+.viewbtnAdd:hover {
+    border-color: #02BCB5; 
+}
