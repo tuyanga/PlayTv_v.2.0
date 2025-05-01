@@ -14,17 +14,13 @@ export default function FavoritesPage() {
         <p>Дуртай кино нэмээгүй байна</p>
       ) : (
         <div className={styles.favoritesGrid}>
-          {favorites.map((movie, index) => (
-            <div key={index} className={styles.favoriteItem}>
-              <Card
-                title={movie.title}
-                category={movie.category}
-                duration={movie.duration}
-                poster={movie.poster}
-              />
+          {favorites.map((movie) => (
+            <div key={movie.id} className={styles.favoriteItem}>
+              <Card movie={movie} hideAddButton={true}/>
               <button 
                 onClick={() => removeFromFavorites(movie)}
                 className={styles.removeButton}
+                aria-label={`Remove ${movie.title} from favorites`}
               >
                 <i className="fas fa-times"></i> Устгах
               </button>
