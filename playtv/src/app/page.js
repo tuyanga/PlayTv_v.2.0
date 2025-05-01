@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Slider from "./components/slider.js"
 import Carousel from "./components/carousel.js";
 

@@ -13,10 +13,10 @@ export default function Carousel() {
     const { addToFavorites } = useFavorites();
 
     useEffect(() => {
-        fetch('/api/featureMovie')
+        fetch('/api/testdb')
             .then(res => res.json())
             .then (data => {
-                setCarouselData(data);
+                setCarouselData(data.movies);
                 startInterval();
             })
             .catch(err => console.error('Falied to fetch data.',err));
