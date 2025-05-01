@@ -6,8 +6,9 @@
     box-sizing: border-box;
   }
   body {
+    margin-top:10%;
     font-family: sans-serif;
-    margin: 0;
+
     background-color: #111;
     color: #fff;
   }
@@ -155,7 +156,7 @@
     background: #07131c;
     padding: 20px;
     width: 90%;
-    max-width: 400px;
+    max-width: 600px;
     border-radius: 10px;
     text-align: center;
     position: relative;
@@ -294,3 +295,62 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .package {
+    background-color: #17263070;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+  
+  .container, .package {
+    border-radius: 28px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  
+  .package .price {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .package .activate-btn {
+    background-color: var(--variable-collection-signin-color);
+    border-radius: 40px;
+    padding: 10px 20px;
+    color: #b3b3b3b2;
+    border: 3px solid;
+    border-color: #838383;
+    cursor: pointer;
+  }
+  .payment-history {
+    margin-top: 20px;
+  }
+  
+  .payment-history table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .payment-history th, 
+  .payment-history td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #838383;
+  }
+  
+  .payment-history th {
+    background-color: #172630;
+    color: #02bcb5;
+  }
+  

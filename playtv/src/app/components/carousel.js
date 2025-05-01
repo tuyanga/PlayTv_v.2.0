@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useRef } from 'react';
 import styles from "./styles/carousel.module.css"
+import { useFavorites } from '../context/FavoritesContext';
 
 export default function Carousel() {
 
@@ -8,6 +9,8 @@ export default function Carousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const intervalRef = useRef(null);
     const intervalDuration = 5000;
+
+    const { addToFavorites } = useFavorites();
 
     useEffect(() => {
         fetch('/api/featureMovie')
@@ -44,10 +47,26 @@ export default function Carousel() {
         stopInterval();
         startInterval();
     };
+
+    const handleAddToFavorites = (e) => {
+        if (!carouselData.length || !carouselData[currentIndex]) return;
+
+        const current = carouselData[currentIndex];
+        e.stopPropagation();
+        addToFavorites({
+            title: current.title,
+            category: current.category || '',
+            duration: current.duration || '',
+            poster: current.image
+        });
+        alert(`${current.title} нь дуртай жагсаалтад нэмэгдлээ!`);
+  };
     
     if (!carouselData.length || !carouselData[currentIndex]) return <p>Loading...</p>;
 
     const current = carouselData[currentIndex]; 
+    
+
 
     return (
         <div className={styles.carouselTrack} style = {{backgroundImage: `url(${current.image})`}}>
@@ -60,7 +79,7 @@ export default function Carousel() {
                     </div>
                     <div className={styles.buttonContainer}>
                     <button className={styles.btnPlay}><i className="fas fa-play"></i> ТОГЛУУЛАХ</button>
-                    <button className ={styles.btnAdd}><i className="fas fa-plus"></i></button>
+                    <button className ={styles.btnAdd} onClick={handleAddToFavorites}><i className="fas fa-plus"></i></button>
                 </div>
               </div>
           </div>
