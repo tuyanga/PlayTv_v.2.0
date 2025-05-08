@@ -10,11 +10,14 @@ export default function AccountSettings() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const email = localStorage.getItem('userEmail');
-    if (email) {
-      fetch(`/api/me/?email=${email}`)
+    const phoneNumber = localStorage.getItem('phoneNumber'); // Use phoneNumber instead of email
+    if (phoneNumber) {
+      fetch(`/api/me/?phoneNumber=${phoneNumber}`) // Fetch user by phoneNumber
         .then(res => res.json())
-        .then(data => setUser(data));
+        .then(data => {
+          console.log('Fetched user data:', data);
+          setUser(data);
+        })
     }
   }, []);
 
@@ -24,8 +27,8 @@ export default function AccountSettings() {
       <h3>Миний бүртгэл</h3>
       <div className="account-info">
         <div className="info-item">
-          <span>{user?.username || 'Түр хадгалагдаагүй'}</span>
-          <span>{user?.id || '000000'}</span>
+        <span>Хэрэглэгчийн нэр</span>
+          <span>{user?.name || 'Түр хадгалагдаагүй'}</span>
         </div>
 
         <PasswordChange />

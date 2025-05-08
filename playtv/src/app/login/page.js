@@ -24,7 +24,9 @@ export default function LoginPage() {
 
     if (res.ok) {
       localStorage.setItem('user', JSON.stringify(data.user));
-      router.push('/settings');
+          // Store the phone number separately
+    localStorage.setItem('phoneNumber', data.user.phoneNumber);
+      router.push('/');
     } else {
       setMessage(data.message || 'Login failed');
     }
