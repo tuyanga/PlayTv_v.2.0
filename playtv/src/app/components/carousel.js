@@ -13,7 +13,7 @@ export default function Carousel() {
     const { addToFavorites } = useFavorites();
 
     useEffect(() => {
-        fetch('/api/movie')
+        fetch('/api/testdb')
             .then(res => res.json())
             .then (data => {
                 setCarouselData(data.movies);
@@ -68,8 +68,6 @@ export default function Carousel() {
 
     const current = carouselData[currentIndex]; 
     
-
-
     return (
         <div className={styles.carouselTrack} style = {{backgroundImage: `url(${current.image})`}}>
             <div className={styles.carouselOverlay}></div>
