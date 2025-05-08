@@ -9,7 +9,7 @@ export default function PhoneChange() {
   const [newPhone, setNewPhone] = useState('');
   const [repeatPhone, setRepeatPhone] = useState('');
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const mongolianPhoneRegex = /^(8|9|7)[0-9]{7}$/;
 
     if (!mongolianPhoneRegex.test(newPhone)) {
@@ -22,9 +22,30 @@ export default function PhoneChange() {
       return;
     }
 
-    setError('');
-    alert('Утасны дугаар амжилттай солигдлоо.');
-    setShowPopup(false);
+    try {
+      const currentPhone = localStorage.getItem('phoneNumber'); // Get the current phone number from localStorage
+      const res = await fetch('/api/change-phone', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPhone, newPhone }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Утасны дугаар амжилттай солигдлоо.');
+        localStorage.setItem('phoneNumber', newPhone); // Update the phone number in localStorage
+        setShowPopup(false);
+        setNewPhone('');
+        setRepeatPhone('');
+        setError('');
+      } else {
+        setError(data.message || 'Утасны дугаар солих явцад алдаа гарлаа.');
+      }
+    } catch (error) {
+      console.error('Error changing phone number:', error);
+      setError('Сүлжээний алдаа гарлаа.');
+    }
   };
 
   return (
