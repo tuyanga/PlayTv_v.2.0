@@ -24,6 +24,16 @@ export default async function ViewPage({ params }) {
   return (
       <div>
           <View {...movie} />
+          <div style={{ marginTop: '2rem', display: 'flex', justifyContent: "center", alignItems: "center"}}>
+            <iframe
+                src={"https://vidsrc.xyz/embed/movie/385687"}
+                width="50%"
+                height="500"
+                allowFullScreen
+                frameBorder="0"
+                title="Movie Player"
+            />
+        </div>
       </div>
   );
 }
