@@ -10,22 +10,37 @@ export default function PasswordChange() {
   const [newPass, setNewPass] = useState('');
   const [repeatPass, setRepeatPass] = useState('');
 
-  const handleSave = () => {
-    const valid = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+  const handleSave = async () => {
 
-    if (!valid.test(newPass)) {
-      setError('Нууц үг нь дор хаяж 8 тэмдэгт, 1 том үсэг, 1 тусгай тэмдэгттэй байх ёстой.');
-      return;
-    }
 
     if (newPass !== repeatPass) {
       setError('Шинэ нууц үг таарахгүй байна.');
       return;
     }
 
-    setError('');
-    alert('Нууц үг амжилттай солигдлоо.');
-    setShowPopup(false);
+    try {
+      const phoneNumber = localStorage.getItem('phoneNumber'); // Get the user's phone number from localStorage
+      const res = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber, currentPass, newPass }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Нууц үг амжилттай солигдлоо.');
+        setShowPopup(false);
+        setCurrentPass('');
+        setNewPass('');
+        setRepeatPass('')
+      } else {
+        setError(data.message || 'Нууц үг солих явцад алдаа гарлаа.');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      setError('Сүлжээний алдаа гарлаа.');
+    }
   };
 
   return (
