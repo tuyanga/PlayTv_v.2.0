@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 
-
 export default function PaymentHistory({ payments }) {
   const [showHistory, setShowHistory] = useState(false);
 
@@ -21,18 +20,19 @@ export default function PaymentHistory({ payments }) {
       {showHistory && (
         <div className="popup" onClick={() => setShowHistory(false)}>
           <div className="popup-content large" onClick={(e) => e.stopPropagation()}>
-            <FaXmark className="close-btn" onClick={() => setShowHistory(false)}/>
+            <FaXmark className="close-btn" onClick={() => setShowHistory(false)} />
             
             <h2>Төлбөрийн түүх</h2>
             
-            {payments.length === 0 ? (
+            {!Array.isArray(payments) || payments.length === 0 ? (
               <p className="no-payments">Төлбөрийн түүх хоосон байна</p>
             ) : (
-              <div className="payment-table-container">
-                <table className="payment-table">
+              <div className="payment-history">
+                <table>
                   <thead>
                     <tr>
-                      <th>Огноо</th>
+                      <th>Эхлэх огноо</th>
+                      <th>Дуусах огноо</th>
                       <th>Багц</th>
                       <th>Дүн</th>
                       <th>Төлөв</th>
@@ -41,9 +41,10 @@ export default function PaymentHistory({ payments }) {
                   <tbody>
                     {payments.map((payment, index) => (
                       <tr key={index}>
-                        <td>{payment.date}</td>
-                        <td>{payment.package}</td>
-                        <td>{payment.amount}</td>
+                        <td>{new Date(payment.startDate).toLocaleDateString()}</td>
+                        <td>{new Date(payment.endDate).toLocaleDateString()}</td>
+                        <td>{payment.packageName}</td>
+                        <td>{payment.amount || '9900₮'}</td>
                         <td className={`status ${payment.status.toLowerCase()}`}>
                           {payment.status}
                         </td>

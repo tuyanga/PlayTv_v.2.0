@@ -26,9 +26,17 @@ export default function PaymentPage() {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const res = await fetch('/api/payments');
+        const phoneNumber = localStorage.getItem('phoneNumber');
+        if (!phoneNumber) return;
+
+        const res = await fetch(`/api/payment-history?phoneNumber=${phoneNumber}`);
         const data = await res.json();
-        setPayments(data);
+
+        if (res.ok && data.success) {
+          setPayments(data.subscriptions); // Зөвхөн subscriptions массивыг дамжуулна
+        } else {
+          console.error('Төлбөрийн түүх авахад алдаа:', data.message);
+        }
       } catch (error) {
         console.error('Төлбөрийн түүх авахад алдаа:', error);
       }
@@ -36,33 +44,12 @@ export default function PaymentPage() {
     fetchPayments();
   }, []);
 
-  // Шинэ төлбөр нэмэх
-  const handleNewPayment = async (paymentData) => {
-    try {
-      const verifyRes = await fetch('/api/payments/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone: paymentData.phone,
-          smsCode: paymentData.smsCode
-        })
-      });
-      
-      const data = await verifyRes.json();
-      if (data.success) {
-        setPayments([...payments, data.payment]);
-      }
-    } catch (error) {
-      console.error('Төлбөр бүртгэхэд алдаа:', error);
-    }
-  };
-
   return (
     <section className="account-settings">
       <h2>Төлбөрийн хэсэг</h2>
       <h3>Идэвхжүүлсэн багц</h3>
       <div className="account-info">
-        <PaymentPopup packages={packages} onPaymentSuccess={handleNewPayment} />
+        <PaymentPopup packages={packages} />
         <div className="info-item">
           <span>Автомат сунгалт</span>
           <label className="switch">
