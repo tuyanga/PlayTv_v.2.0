@@ -1,0 +1,95 @@
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 100 auto;
+    color: #FDFDFF;
+    font-size: 1rem;
+  }
+
+.myHeader{
+    display: flex;
+    justify-content: space-between;
+}
+  
+.logo {
+  font-family: "League Spartan", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+  
+.logo a{
+  text-decoration: none;
+  color: #02BCB5;
+}
+
+.loginBtn{
+  padding: 5px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: medium;
+  color: #b3b3b3;
+}
+
+.loginBtn:hover{
+  background-color: #02BCB5;
+  color: #FDFDFF;
+}
+
+.contentContainer{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  gap: 200px;
+}
+
+.content{
+  flex-direction: column;
+}
+
+.content a{
+  text-decoration: none;
+  font-weight: 700;
+  color: #02BCB5;
+}
+
+.content h4{
+  text-decoration: none;
+  font-weight: 700;
+  font-weight: 18px;
+}
+
+.btnContainer{
+  margin-top: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signUpBox{
+  border: solid #FDFDFF;
+  border-width: 0.2px;
+  border-radius: 5px;
+  padding: 10px 25px;
+  background-color: rgba(179, 179, 179, 0.08);
+  font-weight: 300;
+  transition: 0.3s ease;
+}
+
+.signUpBtn {
+  display: flex;
+  background-color:#029E98; 
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+.signUpBtn:hover{
+  background-color: #02BCB5;
+}
