@@ -6,7 +6,8 @@ import Link from 'next/link';
 import styles from './signup.module.css'; // Import the CSS module
 
 export default function SignUpPage() {
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(''); // Added state for name
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -23,7 +24,7 @@ export default function SignUpPage() {
     const res = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, phoneNumber, password }), // Include name in the request body
     });
 
     const data = await res.json();
@@ -41,11 +42,19 @@ export default function SignUpPage() {
       <h2 className={styles.title}>Sign Up</h2>
       <form onSubmit={handleSignUp} className={styles.form}>
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
+          type="text"
+          placeholder="Name"
+          value={name}
           required
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setName(e.target.value)} // Update name state
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={phoneNumber}
+          required
+          onChange={(e) => setPhoneNumber(e.target.value)}
           className={styles.input}
         />
         <input
@@ -68,8 +77,8 @@ export default function SignUpPage() {
           Sign Up
         </button>
         <p>
-  Don't have an account? <Link href="/signup">Sign Up</Link>
-</p>
+          Already have an account? <Link href="/login">Login</Link>
+        </p>
       </form>
       {message && <p className={styles.message}>{message}</p>}
     </div>

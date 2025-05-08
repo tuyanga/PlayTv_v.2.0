@@ -4,11 +4,11 @@ import bcrypt from 'bcrypt';
 export async function POST(req) {
   try {
     const body = await req.json(); // Parse the JSON body
-    const { email, password } = body;
+    const { phoneNumber, password } = body;
 
-    if (!email || !password) {
+    if (!phoneNumber || !password) {
       return new Response(
-        JSON.stringify({ message: 'Email and password are required' }),
+        JSON.stringify({ message: 'Phone number and password are required' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -19,10 +19,10 @@ export async function POST(req) {
     const usersCollection = db.collection('users'); // Replace 'users' with your collection name
 
     // Check if the user exists in the database
-    const user = await usersCollection.findOne({ email });
+    const user = await usersCollection.findOne({ phoneNumber });
     if (!user) {
       return new Response(
-        JSON.stringify({ message: 'Invalid email or password' }),
+        JSON.stringify({ message: 'Invalid phone number or password' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -31,7 +31,7 @@ export async function POST(req) {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return new Response(
-        JSON.stringify({ message: 'Invalid email or password' }),
+        JSON.stringify({ message: 'Invalid phone number or password' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -42,7 +42,7 @@ export async function POST(req) {
         message: 'Login successful',
         user: {
           name: user.name,
-          email: user.email,
+          phoneNumber: user.phoneNumber,
         },
         token: 'fake-jwt-token', // Replace with a real JWT if needed
       }),

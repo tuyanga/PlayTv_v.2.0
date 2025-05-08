@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './login.module.css'; // Import the CSS module
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function LoginPage() {
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ phoneNumber, password }),
     });
 
     const data = await res.json();
@@ -35,11 +35,11 @@ export default function LoginPage() {
       <h2 className={styles.title}>Login</h2>
       <form onSubmit={handleLogin} className={styles.form}>
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
+          type="text"
+          placeholder="Phone Number"
+          value={phoneNumber}
           required
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setPhoneNumber(e.target.value)}
           className={styles.input}
         />
         <input
@@ -54,8 +54,8 @@ export default function LoginPage() {
           Login
         </button>
         <p>
-  Don't have an account? <Link href="/signup">Sign Up</Link>
-</p>
+          Don't have an account? <Link href="/signup">Sign Up</Link>
+        </p>
       </form>
       {message && <p className={styles.message}>{message}</p>}
     </div>

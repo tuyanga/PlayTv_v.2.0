@@ -4,11 +4,11 @@ import bcrypt from 'bcrypt';
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { email, password } = body;
+    const { name, phoneNumber, password } = body;
 
-    if (!email || !password) {
+    if (!name || !phoneNumber || !password) {
       return new Response(
-        JSON.stringify({ message: 'Email and password are required' }),
+        JSON.stringify({ message: 'Name, phone number, and password are required' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -19,7 +19,7 @@ export async function POST(req) {
     const usersCollection = db.collection('users'); // Replace 'users' with your collection name
 
     // Check if the user already exists
-    const existingUser = await usersCollection.findOne({ email });
+    const existingUser = await usersCollection.findOne({ phoneNumber });
     if (existingUser) {
       return new Response(
         JSON.stringify({ message: 'User already exists' }),
@@ -31,7 +31,7 @@ export async function POST(req) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save the new user to the database
-    const newUser = { email, password: hashedPassword };
+    const newUser = { name, phoneNumber, password: hashedPassword };
     await usersCollection.insertOne(newUser);
 
     return new Response(
