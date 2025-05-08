@@ -13,7 +13,7 @@ export default function Carousel() {
     const { addToFavorites } = useFavorites();
 
     useEffect(() => {
-        fetch('/api/testdb')
+        fetch('/api/movie')
             .then(res => res.json())
             .then (data => {
                 setCarouselData(data.movies);
@@ -62,7 +62,9 @@ export default function Carousel() {
         alert(`${current.title} нь дуртай жагсаалтад нэмэгдлээ!`);
   };
     
-    if (!carouselData.length || !carouselData[currentIndex]) return <p>Loading...</p>;
+    if (!carouselData || carouselData.length === 0 || !carouselData[currentIndex]) {
+        return <p>Loading...</p>;
+    }
 
     const current = carouselData[currentIndex]; 
     
