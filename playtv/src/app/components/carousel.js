@@ -17,18 +17,24 @@ export default function Carousel() {
             .then(res => res.json())
             .then (data => {
                 setCarouselData(data.movies);
-                startInterval();
             })
             .catch(err => console.error('Falied to fetch data.',err));
 
         return () => stopInterval();
     }, []);
 
+    useEffect(() => {
+        if (carouselData.length > 0) {
+            startInterval();
+        }
+    }, [carouselData]);
+
     const startInterval = () => {
         stopInterval();
         intervalRef.current = setInterval(() => {
-            setCurrentIndex((prev => (prev + 1) % carouselData.length));
+            setCurrentIndex((prev => carouselData.length > 0 ? Math.floor((prev + 1) % carouselData.length) : 0));
         }, intervalDuration);
+        
     };
 
     const stopInterval = () => {
