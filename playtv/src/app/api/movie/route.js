@@ -102,6 +102,49 @@ const data = [
     },
 ];
 
-return Response.json(data);
+try {
+    // MongoDB-оос өгөгдөл авах
+    const client = await clientPromise;
+    const db = client.db('playtv'); // Өөрийн өгөгдлийн сангийн нэрийг оруулна
+    const moviesCollection = db.collection('movies'); // Коллекцийн нэр
+    const moviesFromDb = await moviesCollection.find({}).toArray();
+
+    // MongoDB өгөгдлийг статик өгөгдөлтэй нэгтгэх
+    const combinedData = [...data, ...moviesFromDb];
+
+    return NextResponse.json(combinedData);
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    return NextResponse.json({ success: false, message: 'Алдаа гарлаа.' }, { status: 500 });
+  }
 
 }
+export async function POST(req) {
+    try {
+      const newMovie = await req.json(); // Хүсэлтээс өгөгдлийг авах
+  
+      const client = await clientPromise;
+      const db = client.db('playtv');
+      const moviesCollection = db.collection('movies');
+  
+      // MongoDB-оос бүх өгөгдлийг авах
+      const moviesFromDb = await moviesCollection.find({}).toArray();
+  
+      // Статик өгөгдөлтэй нэгтгэх
+      const combinedData = [...data, ...moviesFromDb];
+  
+      // Хамгийн их `id`-г олох
+      const maxId = combinedData.reduce((max, movie) => (movie.id > max ? movie.id : max), 0);
+  
+      // Шинэ `id` үүсгэх
+      newMovie.id = maxId + 1;
+  
+      // Өгөгдлийн санд кино нэмэх
+      await moviesCollection.insertOne(newMovie);
+  
+      return NextResponse.json({ success: true, message: 'Кино амжилттай нэмэгдлээ!', newMovie });
+    } catch (error) {
+      console.error('Error adding movie:', error);
+      return NextResponse.json({ success: false, message: 'Кино нэмэхэд алдаа гарлаа.' }, { status: 500 });
+    }
+  }
