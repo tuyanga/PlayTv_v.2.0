@@ -15,7 +15,7 @@ export default function Header() {
           <div className={styles.myHeader}>
             <div className={`${styles.mainHeaderContainer} ${styles.container}`}>
                 <div className={styles.headerLeftContainer}>
-                    <div className={styles.logo}><a href="#" onClick={() => handleNavigation('/')}>PlayTV</a></div>
+                    <div className={styles.logo}><a href="#" onClick={() => handleNavigation('/main')}>PlayTV</a></div>
                             <ul className={styles.navList}>
                                 <li className={styles.navItem}><Link href = "/main">Нүүр</Link></li>
                                 <li className={styles.navItem}><Link href = "#">BOX</Link></li>

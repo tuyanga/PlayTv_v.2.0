@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Star({ rating, maxRating = 5, classname }) {
     
-    const roundedRating = Math.round(rating * 2) / 2; 
+    const roundedRating = Math.round(rating) / 2; 
     const stars = [];
 
     for (let i = 1; i <= maxRating; i++) {

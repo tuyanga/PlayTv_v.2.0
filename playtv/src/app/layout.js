@@ -2,7 +2,6 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
- 
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["300","600","700"]
