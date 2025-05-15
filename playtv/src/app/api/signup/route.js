@@ -1,4 +1,4 @@
-import clientPromise from '@/lib/mongodb'; // Import the shared MongoDB client
+import clientPromise from '@/lib/mongodb1'; // Import the shared MongoDB client
 import bcrypt from 'bcrypt';
 
 export async function POST(req) {

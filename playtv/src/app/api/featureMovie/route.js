@@ -8,7 +8,7 @@ export async function GET() {
             year: 2024, 
             rating: 4.5,
             description: "Нэгэн өсвөр насны хүү хичээл орохоос өмнө амжиж гэр бүлийнхэн нь зааж чадахгүй нэлээд хэдэн зүйлсийг сурахаар шийднэ. Жишээ нь: скейтбордоор гулгах, хэрхэн зөв сээтгэнэх гэх мэт.",
-            image: "images/Didi__lookhorizontal.jpg",
+            image: "/images/Didi__lookhorizontal.jpg",
             poster: "posters/DidiHBO_vertical.jpg"
 
         },
@@ -20,7 +20,7 @@ export async function GET() {
             year: 2024, 
             rating: 3.5,
             description: "Амьдралын утга учир, хайр дурлал, гэр бүл, найз нөхөд, амжилт, алдаа, уналт, босолт, итгэл найдвар, хүсэл мөрөөдөл зэргийг хөндсөн энэхүү кино нь бидний амьдралын хамгийн чухал мөчүүдийг харуулсан бүтээл юм.",
-            image: "images/DespicableMe4__lookhorizontal.jpg",
+            image: "/images/DespicableMe4__lookhorizontal.jpg",
             poster: "posters/AmidrahSaihanS01_vertical.jpg"
         },
         {
@@ -31,7 +31,7 @@ export async function GET() {
             year: 2021, 
             rating: 4.5,
             description: "Махан бөмбөг нь амьдралын утга учир, хайр дурлал, гэр бүл, найз нөхөд, амжилт, алдаа, уналт, босолт, итгэл найдвар, хүсэл мөрөөдөл зэргийг хөндсөн энэхүү кино нь бидний амьдралын хамгийн чухал мөчүүдийг харуулсан бүтээл юм.",
-            image: "images/Skyscraper__lookhorizontal.jpg",
+            image: "/images/Skyscraper__lookhorizontal.jpg",
             poster: "posters/CloudyWithAChanceOfMeatballs_vertical.jpg"
         },
         {
@@ -42,7 +42,7 @@ export async function GET() {
             year: 2024, 
             rating: 5,
             description: "Нэгэн өсвөр насны хүү хичээл орохоос өмнө амжиж гэр бүлийнхэн нь зааж чадахгүй нэлээд хэдэн зүйлсийг сурахаар шийднэ. Жишээ нь: скейтбордоор гулгах, хэрхэн зөв сээтгэнэх гэх мэт.",
-            image: "images/Didi__lookhorizontal.jpg",
+            image: "/images/Didi__lookhorizontal.jpg",
             poster: "posters/DespicableMe4HBO_vertical.jpg"
         },
         {
@@ -53,7 +53,7 @@ export async function GET() {
             year: 2024, 
             rating: 5,
             description: "Kung Fu Panda 4 нь амьдралын утга учир, хайр дурлал, гэр бүл, найз нөхөд, амжилт, алдаа, уналт, босолт, итгэл найдвар, хүсэл мөрөөдөл зэргийг хөндсөн энэхүү кино нь бидний амьдралын хамгийн чухал мөчүүдийг харуулсан бүтээл юм.",
-            image: "images/DespicableMe4__lookhorizontal.jpg",
+            image: "/images/DespicableMe4__lookhorizontal.jpg",
             poster: "posters/KungfuPanda4HBO_vertical.jpg"
         },
     ];

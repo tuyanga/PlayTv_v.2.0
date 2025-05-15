@@ -1,7 +1,7 @@
 'use client'
 import { useFavorites } from '../context/FavoritesContext';
 import styles from './styles.module.css';
-import Card from '../components/card';
+import Card from '../components/card_prox';
 
 export default function FavoritesPage() {
   const { favorites, removeFromFavorites } = useFavorites();

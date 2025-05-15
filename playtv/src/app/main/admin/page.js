@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import styles from './Admin.module.css'; // CSS модулийг импортлох
 
 export default function AdminPage() {
@@ -12,7 +12,7 @@ export default function AdminPage() {
     description: '',
     image: '',
     poster: '',
-    videoPath: '', // Киноны бичлэгний зам нэмэх
+    //videoPath: '', // Киноны бичлэгний зам нэмэх
   });
 
   const [message, setMessage] = useState('');
@@ -29,7 +29,7 @@ export default function AdminPage() {
     }
 
     try {
-      const response = await fetch('/api/movie', {
+      const response = await fetch('/api/add-movie', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export default function AdminPage() {
           description: '',
           image: '',
           poster: '',
-          videoPath: '', // Киноны бичлэгний замыг хоослох
+          //videoPath: '', // Киноны бичлэгний замыг хоослох
         });
       } else {
         setMessage('Кино нэмэхэд алдаа гарлаа.');
@@ -58,6 +58,15 @@ export default function AdminPage() {
       setMessage('Сүлжээний алдаа гарлаа.');
     }
   };
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/movies')
+      .then((res) => res.json())
+      .then((data) => setMovies(data))
+      .catch((err) => console.error('Failed to fetch movies:', err));
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -129,20 +138,20 @@ export default function AdminPage() {
             onChange={handleChange}
             className={styles.input}
           />
-          <input
-            type="text"
-            name="videoPath"
-            placeholder="Киноны бичлэгний зам"
-            value={newMovie.videoPath}
-            onChange={handleChange}
-            className={styles.input}
-          />
           <button type="button" onClick={handleAddMovie} className={styles.button}>
             Нэмэх
           </button>
         </form>
         {message && <p className={styles.message}>{message}</p>}
       </div>
+      <h2>Нэмэгдсэн кинонууд</h2>
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie._id}>
+            {movie.title} ({movie.year}) — {movie.category}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

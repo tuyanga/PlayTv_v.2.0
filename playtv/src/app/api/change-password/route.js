@@ -1,4 +1,4 @@
-import clientPromise from '@/lib/mongodb';
+import clientPromise from '@/lib/mongodb1';
 import bcrypt from 'bcrypt';
 
 export async function POST(req) {
