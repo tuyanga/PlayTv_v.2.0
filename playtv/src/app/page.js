@@ -12,7 +12,7 @@ export default function Landing() {
           <div className={styles.logo}><a href="#">PlayTV</a></div>
           <button 
             className={styles.loginBtn} 
-            onClick={() => router.push('/login')} // НЭВТРЭХ товчийг дарахад login хуудас руу шилжих
+            onClick={() => router.push('/auth/login')} // НЭВТРЭХ товчийг дарахад login хуудас руу шилжих
           >
             НЭВТРЭХ
           </button>
@@ -22,7 +22,7 @@ export default function Landing() {
             <a>PREMIUM БАГЦ</a>
             <h4>БҮХ КИНО</h4>
             <h4>БҮХ ТВ СУВГУУД</h4>
-            <h4>19,900₮/сар</h4>
+            <h4>9,900₮/сар</h4>
           </div>
           <div className={styles.content}>
             <a>BASIC БАГЦ</a>
@@ -40,7 +40,7 @@ export default function Landing() {
             </div>
             <button 
               className={styles.signUpBtn} 
-              onClick={() => router.push('/signup')} // БҮРТГҮҮЛЭХ товчийг дарахад signup хуудас руу шилжих
+              onClick={() => router.push('/auth/signup')} // БҮРТГҮҮЛЭХ товчийг дарахад signup хуудас руу шилжих
             >
               БҮРТГҮҮЛЭХ
             </button>

@@ -17,16 +17,16 @@ export default function Header() {
                 <div className={styles.headerLeftContainer}>
                     <div className={styles.logo}><a href="#" onClick={() => handleNavigation('/')}>PlayTV</a></div>
                             <ul className={styles.navList}>
-                                <li className={styles.navItem}><Link href = "/">Нүүр</Link></li>
+                                <li className={styles.navItem}><Link href = "/main">Нүүр</Link></li>
                                 <li className={styles.navItem}><Link href = "#">BOX</Link></li>
-                                <button onClick={() => handleNavigation('/favorite')}><li className={styles.navItem}><Link href = "#">Миний жагсаалт</Link></li></button>
+                                <button onClick={() => handleNavigation('/main/favorite')}><li className={styles.navItem}><Link href = "#">Миний жагсаалт</Link></li></button>
                             </ul>
                     </div>
                 <div className={styles.headerRightContainer}>
                     <div className={styles.userActions}>
-                        <button onClick={() => handleNavigation('/search')}><i className="fas fa-search"></i></button>
-                        <button onClick={() => handleNavigation('/login')}><i className="fas fa-bell"></i></button>
-                        <button onClick={() => handleNavigation('/settings')}><i className="fas fa-user"></i></button>
+                        <button onClick={() => handleNavigation('/main/search')}><i className="fas fa-search"></i></button>
+                        <button><i className="fas fa-bell"></i></button>
+                        <button onClick={() => handleNavigation('/main/settings')}><i className="fas fa-user"></i></button>
                     </div>
                 </div>
             </div>

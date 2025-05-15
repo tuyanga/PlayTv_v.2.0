@@ -28,9 +28,9 @@ export default function LoginPage() {
           // Store the phone number separately
     localStorage.setItem('phoneNumber', data.user.phoneNumber);
     if (data.user.phoneNumber === '99000000') {
-      router.push('/admin'); // Админ хэсэг рүү шилжүүлэх
+      router.push('/main/admin'); // Админ хэсэг рүү шилжүүлэх
     } else {
-      router.push('/home'); // Энгийн хэрэглэгчийн хэсэг рүү шилжүүлэх
+      router.push('/main'); // Энгийн хэрэглэгчийн хэсэг рүү шилжүүлэх
     }
     } else {
       setMessage(data.message || 'Login failed');

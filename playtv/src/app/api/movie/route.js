@@ -101,22 +101,22 @@ const data = [
         poster: "/posters/ztsuram_vertical.jpg"
     },
 ];
+return Response.json(data);
+// try {
+//     // MongoDB-оос өгөгдөл авах
+//     const client = await clientPromise;
+//     const db = client.db('playtv'); // Өөрийн өгөгдлийн сангийн нэрийг оруулна
+//     const moviesCollection = db.collection('movies'); // Коллекцийн нэр
+//     const moviesFromDb = await moviesCollection.find({}).toArray();
 
-try {
-    // MongoDB-оос өгөгдөл авах
-    const client = await clientPromise;
-    const db = client.db('playtv'); // Өөрийн өгөгдлийн сангийн нэрийг оруулна
-    const moviesCollection = db.collection('movies'); // Коллекцийн нэр
-    const moviesFromDb = await moviesCollection.find({}).toArray();
+//     // MongoDB өгөгдлийг статик өгөгдөлтэй нэгтгэх
+//     const combinedData = [...data, ...moviesFromDb];
 
-    // MongoDB өгөгдлийг статик өгөгдөлтэй нэгтгэх
-    const combinedData = [...data, ...moviesFromDb];
-
-    return NextResponse.json(combinedData);
-  } catch (error) {
-    console.error('Error fetching movies:', error);
-    return NextResponse.json({ success: false, message: 'Алдаа гарлаа.' }, { status: 500 });
-  }
+//     return NextResponse.json(combinedData);
+//   } catch (error) {
+//     console.error('Error fetching movies:', error);
+//     return NextResponse.json({ success: false, message: 'Алдаа гарлаа.' }, { status: 500 });
+//   }
 
 }
 export async function POST(req) {

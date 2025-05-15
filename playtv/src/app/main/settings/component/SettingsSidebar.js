@@ -28,24 +28,24 @@ export default function SettingsSidebar() {
         <ul>
           <li>
             <Link
-              href="/settings"
-              className={activeLink === '/settings' ? 'active' : ''}
+              href="/main/settings"
+              className={activeLink === '/main/settings' ? 'active' : ''}
             >
               Аккаунтын тохиргоо
             </Link>
           </li>
           <li>
             <Link
-              href="/settings/payment"
-              className={activeLink === '/settings/payment' ? 'active' : ''}
+              href="/main/settings/payment"
+              className={activeLink === '/main/settings/payment' ? 'active' : ''}
             >
               Төлбөрийн хэсэг
             </Link>
           </li>
           <li>
             <Link
-              href="/settings/faq"
-              className={activeLink === '/settings/faq' ? 'active' : ''}
+              href="/main/settings/faq"
+              className={activeLink === '/main/settings/faq' ? 'active' : ''}
             >
               Түгээмэл асуултууд
             </Link>

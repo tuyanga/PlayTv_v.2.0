@@ -3,7 +3,7 @@ import View from '../components/view.js';
 async function getMovie(id) {
 
   try {
-    const res = await fetch(`http://localhost:3000/api/movie/${id}`);
+    const res = await fetch(`http://localhost:3001/api/movie/${id}`);
 
     if (!res.ok) {
         throw new Error('Failed to fetch movie');
