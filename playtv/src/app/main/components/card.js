@@ -3,11 +3,11 @@ import styles from "./styles/styles.module.css"
 import { useFavorites } from '../context/FavoritesContext';
 import { useRouter } from "next/navigation";
 
-export default function Card({movie, hideAddButton=false}) {
+export default function Card({movie, hideAddButton=false, index}) {
     const { addToFavorites } = useFavorites();
     const router = useRouter();
 
-    const handleNavigation = (id) => {
+    const handleNavigation = (id = index+1) => {
       router.push(`./view/${id}`);
     };
 

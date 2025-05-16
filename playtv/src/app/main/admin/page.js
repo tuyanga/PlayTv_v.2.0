@@ -1,6 +1,6 @@
 'use client';
-import { useEffect,useState } from 'react';
-import styles from './Admin.module.css'; // CSS модулийг импортлох
+import { useEffect, useState } from 'react';
+import styles from './Admin.module.css';
 
 export default function AdminPage() {
   const [newMovie, setNewMovie] = useState({
@@ -12,10 +12,10 @@ export default function AdminPage() {
     description: '',
     image: '',
     poster: '',
-    //videoPath: '', // Киноны бичлэгний зам нэмэх
   });
-
   const [message, setMessage] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [editId, setEditId] = useState(null); // Шинэ state: edit mode
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,16 +27,12 @@ export default function AdminPage() {
       alert('Киноны нэр болон төрөл заавал шаардлагатай!');
       return;
     }
-
     try {
       const response = await fetch('/api/add-movie', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMovie),
       });
-
       if (response.ok) {
         setMessage('Кино амжилттай нэмэгдлээ!');
         setNewMovie({
@@ -48,8 +44,8 @@ export default function AdminPage() {
           description: '',
           image: '',
           poster: '',
-          //videoPath: '', // Киноны бичлэгний замыг хоослох
         });
+        await fetchMovies();
       } else {
         setMessage('Кино нэмэхэд алдаа гарлаа.');
       }
@@ -59,21 +55,87 @@ export default function AdminPage() {
     }
   };
 
-  const [movies, setMovies] = useState([]);
+  const handleUpdateMovie = async () => {
+    if (!newMovie.title || !newMovie.category) {
+      alert('Киноны нэр болон төрөл заавал шаардлагатай!');
+      return;
+    }
+    try {
+      const response = await fetch(`/api/movies/${editId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMovie),
+      });
+      if (response.ok) {
+        setMessage('Кино амжилттай шинэчлэгдлээ!');
+        setNewMovie({
+          title: '',
+          category: '',
+          duration: '',
+          year: '',
+          rating: '',
+          description: '',
+          image: '',
+          poster: '',
+        });
+        setEditId(null);
+        await fetchMovies();
+      } else {
+        setMessage('Кино шинэчлэхэд алдаа гарлаа.');
+      }
+    } catch (error) {
+      console.error('Error updating movie:', error);
+      setMessage('Сүлжээний алдаа гарлаа.');
+    }
+  };
+
+  const fetchMovies = async () => {
+    try {
+      const res = await fetch('/api/movies');
+      const data = await res.json();
+      setMovies(data);
+    } catch (err) {
+      console.error('Failed to fetch movies:', err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm('Устгах уу?')) return;
+    try {
+      await fetch(`/api/movies/${id}`, { method: 'DELETE' });
+      await fetchMovies();
+    } catch (error) {
+      console.error('Failed to delete movie:', error);
+    }
+  };
+
+  // "Засах" товч дархад формд мэдээлэл populate хийх
+  const handleEdit = (movie) => {
+    setNewMovie({
+      title: movie.title || '',
+      category: movie.category || '',
+      duration: movie.duration || '',
+      year: movie.year || '',
+      rating: movie.rating || '',
+      description: movie.description || '',
+      image: movie.image || '',
+      poster: movie.poster || '',
+    });
+    setEditId(movie._id);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // form руу автоматаар гүйлгэнэ
+  };
 
   useEffect(() => {
-    fetch('/api/movies')
-      .then((res) => res.json())
-      .then((data) => setMovies(data))
-      .catch((err) => console.error('Failed to fetch movies:', err));
+    fetchMovies();
   }, []);
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Админ хэсэг</h1>
       <div className={styles.formContainer}>
-        <h2 className={styles.subtitle}>Кино нэмэх</h2>
-        <form className={styles.form}>
+        <h2 className={styles.subtitle}>{editId ? 'Кино засах' : 'Кино нэмэх'}</h2>
+        <form className={styles.form} onSubmit={e => e.preventDefault()}>
+          {/* ...input fields... */}
           <input
             type="text"
             name="title"
@@ -138,20 +200,77 @@ export default function AdminPage() {
             onChange={handleChange}
             className={styles.input}
           />
-          <button type="button" onClick={handleAddMovie} className={styles.button}>
-            Нэмэх
+          <button
+            type="button"
+            onClick={editId ? handleUpdateMovie : handleAddMovie}
+            className={styles.button}
+          >
+            {editId ? 'Шинэчлэх' : 'Нэмэх'}
           </button>
+          {editId && (
+            <button
+              type="button"
+              className={styles.button}
+              style={{ background: '#888', marginLeft: 8 }}
+              onClick={() => {
+                setEditId(null);
+                setNewMovie({
+                  title: '',
+                  category: '',
+                  duration: '',
+                  year: '',
+                  rating: '',
+                  description: '',
+                  image: '',
+                  poster: '',
+                });
+              }}
+            >
+              Болих
+            </button>
+          )}
         </form>
         {message && <p className={styles.message}>{message}</p>}
       </div>
+
       <h2>Нэмэгдсэн кинонууд</h2>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie._id}>
-            {movie.title} ({movie.year}) — {movie.category}
-          </li>
-        ))}
-      </ul>
+      <div className={styles.tableWrapper}>
+        <table className={styles.movieTable}>
+          <thead>
+            <tr>
+              <th>Постер</th>
+              <th>Нэр</th>
+              <th>Төрөл</th>
+              <th>Он</th>
+              <th>Үргэлжлэх хугацаа</th>
+              <th>Үнэлгээ</th>
+              <th>Үйлдэл</th>
+            </tr>
+          </thead>
+          <tbody>
+            {movies.map((movie) => (
+              <tr key={movie._id}>
+                <td>
+                  {movie.poster ? (
+                    <img src={movie.poster} alt={movie.title} className={styles.posterImg} />
+                  ) : (
+                    <span>---</span>
+                  )}
+                </td>
+                <td>{movie.title}</td>
+                <td>{movie.category}</td>
+                <td>{movie.year}</td>
+                <td>{movie.duration} мин</td>
+                <td>{movie.rating}</td>
+                <td>
+                  <button className={styles.actionBtn} onClick={() => handleEdit(movie)}>Засах</button>
+                  <button className={styles.actionBtn} onClick={() => handleDelete(movie._id)}>Устгах</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

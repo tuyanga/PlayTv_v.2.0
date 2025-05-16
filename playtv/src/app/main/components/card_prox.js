@@ -3,12 +3,14 @@ import styles from "./styles/styles.module.css"
 import { useFavorites } from '../context/FavoritesContext';
 import { useRouter } from "next/navigation";
 
-export default function Card({movie, hideAddButton = false}) {
+export default function Card({movie, hideAddButton = false, route}) {
     const { addToFavorites } = useFavorites();
     const router = useRouter();
 
-    const handleNavigation = (id) => {
-      router.push(`./main/view/${id}`);
+    const handleNavigation = () => {
+      if (route) {
+            window.location.href = route;
+        }
     };
 
     const handleAddToFavorites = (e) => {
@@ -21,7 +23,7 @@ export default function Card({movie, hideAddButton = false}) {
     <div
       className={styles.movieCard}
       style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}
-      onClick={() => handleNavigation(movie.id)}
+      onClick={handleNavigation}
     >
         <div className={styles.cardContentContainer}>
             <button 

@@ -13,13 +13,18 @@ export default function Slider({title = 'Slider Title'}) {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const scrollStep = 3;
 
+    const fetchMovies = async () => {
+    try {
+      const res = await fetch('/api/movies');
+      const data = await res.json();
+      setSliderData(data);
+    } catch (err) {
+      console.error('Failed to fetch movies:', err);
+    }
+  };
+
     useEffect(() => {
-        fetch('/api/movie/')
-            .then(res => res.json())
-            .then (data => {
-                setSliderData(data);
-            })
-            .catch(err => console.error('Falied to fetch data.',err));
+        fetchMovies();
 
         const handleResize = () => {
             if (cardRef.current) {
@@ -57,8 +62,8 @@ export default function Slider({title = 'Slider Title'}) {
             <button className = {`${styles.sliderArrow} ${styles.prevArrow}`} onClick={handlePrev}><i className="fas fa-caret-left"></i></button>
                 <div className = {styles.movieListContainer} style={{transform: `translateX(-${position * cardWidth}px)`}}>
                     {sliderData.map((movie, index) => (
-                        <div key={movie.id} ref={index === 0 ? cardRef : null}>
-                            <Card movie={movie}/>
+                        <div key={index} ref={index === 0 ? cardRef : null}>
+                            <Card movie={movie} index={index}/>
                         </div>
                     ))}
                 </div>

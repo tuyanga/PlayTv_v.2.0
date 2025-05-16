@@ -1,5 +1,10 @@
 .container {
-  max-width: 600px;
+  
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-top: 30px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -95,4 +100,44 @@
   font-size: 14px;
   color: green;
   text-align: center;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+.movieTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.movieTable th, .movieTable td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  text-align: center;
+}
+.movieTable th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+.posterImg {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.actionBtn {
+  margin: 0 4px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.actionBtn:hover {
+  background: #1565c0;
 }

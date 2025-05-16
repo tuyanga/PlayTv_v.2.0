@@ -57,7 +57,7 @@ export default function Slider({ title, genreId }) {
                 <div className = {styles.movieListContainer} style={{transform: `translateX(-${position * cardWidth}px)`}}>
                     {sliderData.map((movie, index) => (
                         <div key={movie.id} ref={index === 0 ? cardRef : null}>
-                            <Card movie={movie}/>
+                            <Card movie={movie} route={`/main/view/${movie.id}`}/>
                         </div>
                     ))}
                 </div>
