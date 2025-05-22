@@ -6,19 +6,42 @@ import { FaXmark } from 'react-icons/fa6';
 export default function PaymentPopup() {
   const [showPopup, setShowPopup] = useState(false);
   const [packages, setPackages] = useState([]);
+  const [activeSubscriptions, setActiveSubscriptions] = useState([]);
 
   useEffect(() => {
-    // Fetch packages from the API
-    const fetchPackages = async () => {
+    const fetchPackagesAndSubscriptions = async () => {
       const res = await fetch('/api/packages');
       const data = await res.json();
       setPackages(data);
+
+      const phoneNumber = localStorage.getItem('phoneNumber');
+      if (!phoneNumber) return;
+
+      const res2 = await fetch(`/api/payment-history?phoneNumber=${phoneNumber}`);
+      const result = await res2.json();
+      if (res2.ok && result.success) {
+        const now = new Date();
+        const actives = result.subscriptions.filter((sub) => {
+          return sub.status === 'active' && new Date(sub.endDate) > now;
+        });
+        setActiveSubscriptions(actives);
+      }
     };
 
-    fetchPackages();
+    fetchPackagesAndSubscriptions();
   }, []);
 
   const handleActivate = async (pkg) => {
+    const alreadyActive = activeSubscriptions.some(
+      (sub) =>
+        sub.packageName === 'Standard' ||
+        sub.packageName === 'Premium'
+    );
+
+    if (alreadyActive) {
+      alert('Та аль хэдийн идэвхтэй багцтай байна.');
+      return;
+    }
     try {
       const phoneNumber = localStorage.getItem('phoneNumber'); // Get the user's phone number
       const res = await fetch('/api/subscription', {
@@ -48,7 +71,7 @@ export default function PaymentPopup() {
   return (
     <>
       <div className="info-item">
-        <span>Идэвхтэй багц байхгүй</span>
+        <span>{activeSubscriptions.length === 0 ? 'Идэвхтэй багц байхгүй' : 'Идэвхтэй багц байгаа'}</span>
         <button onClick={() => setShowPopup(true)} className="link-button">
           Өөрчлөх
         </button>
