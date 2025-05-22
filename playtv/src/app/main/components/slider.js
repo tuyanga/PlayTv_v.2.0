@@ -15,7 +15,7 @@ export default function Slider({title = 'Slider Title'}) {
 
     const fetchMovies = async () => {
     try {
-      const res = await fetch('/api/movies');
+      const res = await fetch('/api/movie');
       const data = await res.json();
       setSliderData(data);
     } catch (err) {

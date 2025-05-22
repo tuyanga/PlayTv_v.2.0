@@ -1,4 +1,3 @@
-// /app/api/movies-by-genres/[id]/route.js
 export async function GET(request, { params }) {
     const param = await params;
     const id = param.id;

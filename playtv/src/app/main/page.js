@@ -18,7 +18,7 @@ export default function Home() {
 
   if (!genres.length) return <p>Loading ....</p>
 
-  const selectedGenres = genres.filter(g => ['Action', 'Comedy', 'Drama', 'Horror'].includes(g.name));
+  const selectedGenres = genres.filter(g => ['Action', 'Comedy', 'Animation', 'Horror'].includes(g.name));
 
   return (
     <div>

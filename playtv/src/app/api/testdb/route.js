@@ -3,7 +3,7 @@ import clientPromise from "@/lib/mongodb2";
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("playtv"); // <-- your db name
+    const db = client.db("playtv"); 
     const movies = await db.collection("movies").find({}).toArray();
 
     return new Response(JSON.stringify({ success: true, movies }), {
