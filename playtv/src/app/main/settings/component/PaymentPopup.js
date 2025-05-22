@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaXmark } from 'react-icons/fa6';
 
-export default function PaymentPopup() {
+export default function PaymentPopup({ onRefresh }) {
   const [showPopup, setShowPopup] = useState(false);
   const [packages, setPackages] = useState([]);
   const [activeSubscriptions, setActiveSubscriptions] = useState([]);
 
-  useEffect(() => {
+
     const fetchPackagesAndSubscriptions = async () => {
       const res = await fetch('/api/packages');
       const data = await res.json();
@@ -27,46 +27,64 @@ export default function PaymentPopup() {
         setActiveSubscriptions(actives);
       }
     };
-
+  useEffect(() => {
     fetchPackagesAndSubscriptions();
   }, []);
 
-  const handleActivate = async (pkg) => {
-    const alreadyActive = activeSubscriptions.some(
-      (sub) =>
-        sub.packageName === 'Standard' ||
-        sub.packageName === 'Premium'
-    );
+ const handleActivate = async (pkg) => {
+  const hasStandard = activeSubscriptions.some(
+    (sub) => sub.packageName === 'Standard'
+  );
+  const hasPremium = activeSubscriptions.some(
+    (sub) => sub.packageName === 'Premium'
+  );
 
-    if (alreadyActive) {
-      alert('Та аль хэдийн идэвхтэй багцтай байна.');
-      return;
+  // Хоёр багц хоёулаа идэвхтэй байвал
+  if (hasStandard && hasPremium) {
+    alert('Та аль хэдийн хоёр багц идэвхжүүлсэн байна. Дахин идэвхжүүлэх боломжгүй.');
+    return;
+  }
+
+  // Аль багцтай байгаагаас хамаарч шинэ багцыг хориглох
+  if (
+    (hasStandard && pkg.name === 'Standard') ||
+    (hasPremium && pkg.name === 'Premium')
+  ) {
+    alert(`Та аль хэдийн ${pkg.name} багцтай байна.`);
+    return;
+  }
+
+  // 🔄 Идэвхжүүлэх процесс
+  try {
+    const phoneNumber = localStorage.getItem('phoneNumber');
+
+    const res = await fetch('/api/subscription', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        phoneNumber,
+        packageId: pkg.id,
+        packageName: pkg.name,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+  alert('Багц амжилттай идэвхжлээ.');
+  setShowPopup(false);
+
+  await fetchPackagesAndSubscriptions();
+  onRefresh?.(); 
+} else {
+      alert(data.message || 'Багц идэвхжүүлэхэд алдаа гарлаа.');
     }
-    try {
-      const phoneNumber = localStorage.getItem('phoneNumber'); // Get the user's phone number
-      const res = await fetch('/api/subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phoneNumber,
-          packageId: pkg.id,
-          packageName: pkg.name,
-        }),
-      });
+  } catch (error) {
+    console.error('Error activating package:', error);
+    alert('Сүлжээний алдаа гарлаа.');
+  }
+};
 
-      const data = await res.json();
-
-      if (res.ok) {
-        alert('Багц амжилттай идэвхжлээ.');
-        setShowPopup(false); // Close the popup
-      } else {
-        alert(data.message || 'Багц идэвхжүүлэхэд алдаа гарлаа.');
-      }
-    } catch (error) {
-      console.error('Error activating package:', error);
-      alert('Сүлжээний алдаа гарлаа.');
-    }
-  };
 
   return (
     <>
