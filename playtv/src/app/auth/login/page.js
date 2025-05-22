@@ -61,7 +61,7 @@ export default function LoginPage() {
           Login
         </button>
         <p>
-          Don't have an account? <Link href="/signup">Sign Up</Link>
+          Don't have an account? <Link href="/auth/signup">Sign Up</Link>
         </p>
       </form>
       {message && <p className={styles.message}>{message}</p>}

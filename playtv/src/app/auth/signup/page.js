@@ -31,7 +31,7 @@ export default function SignUpPage() {
 
     if (res.ok) {
       setMessage('Sign-up successful! Redirecting to login...');
-      setTimeout(() => router.push('/login'), 2000); // Redirect to login page after 2 seconds
+      setTimeout(() => router.push('/auth/login'), 2000); // Redirect to login page after 2 seconds
     } else {
       setMessage(data.message || 'Sign-up failed');
     }
@@ -77,7 +77,7 @@ export default function SignUpPage() {
           Sign Up
         </button>
         <p>
-          Already have an account? <Link href="/login">Login</Link>
+          Already have an account? <Link href="/auth/login">Login</Link>
         </p>
       </form>
       {message && <p className={styles.message}>{message}</p>}
