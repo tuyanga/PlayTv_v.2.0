@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useRef } from 'react';
-import styles from "./styles/styles.module.css"  
+import styles from "./styles/slider.module.css"  
 import Card from "./card.js"  
 
 export default function Slider({title = 'Slider Title'}) {

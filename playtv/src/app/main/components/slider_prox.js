@@ -1,70 +1,49 @@
-'use client'
-import { useEffect, useState, useRef } from 'react';
-import styles from "./styles/styles.module.css"  
-import Card from "./card_prox.js"  
+'use client';
 
-export default function Slider({ title, genreId }) {
-    const cardRef = useRef(null);
-    const [sliderData, setSliderData] = useState([]);
-    const [cardWidth, setCardWidth] = useState(240);
-    const [visibleCards, setVisibleCards] = useState(6);
-    const [position, setPosition] = useState(0);
-    const scrollStep = 3;
+import React, { useState, useEffect, useRef } from 'react';
+import Card from './card';
+import styles from './styles/slider.module.css';
+
+export default function Slider_Prox({ title, genreId }) {
+    const [movies, setMovies] = useState([]);
+    const movieListRef = useRef(null);
 
     useEffect(() => {
-
-        if (!genreId) return;
-
-        fetch(`/api/movies-by-genres?genreId=${genreId}`)
-            .then(res => res.json())
-            .then(setSliderData)
-            .catch(err => console.error('Falied to fetch movies.',err));
-
-        const handleResize = () => {
-            if (cardRef.current) {
-                const styles = window.getComputedStyle(cardRef.current);
-                const width = parseInt(styles.width, 10);
-                setCardWidth(width);
-                setVisibleCards(width < 220 ? 3: 6);
-            }
+        const fetchMoviesForGenre = async () => {
+            const apiUrl = `/api/search?genreId=${genreId}&type=movie&sortBy=popularity.desc&page=1`;
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            setMovies(data.results.slice(0, 20));
         };
 
-        window.addEventListener('resize', handleResize);
-        handleResize(); 
+        if (genreId) {
+            fetchMoviesForGenre();
+        }
+    }, [genreId, title]);
 
-        return () => window.removeEventListener('resize', handleResize);
-        
-    }, [genreId]);
-
-    const maxPosition = sliderData.length - visibleCards;
-
-    const handleNext = () => {
-        setPosition((prev) => Math.min(prev + scrollStep, maxPosition));
+    const scroll = (direction) => {
+        if (movieListRef.current) {
+            const scrollAmount = movieListRef.current.offsetWidth * 0.7;
+            if (direction === 'left') {
+                movieListRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                movieListRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
     };
-
-    const handlePrev = () => {
-        setPosition((prev) => Math.max(prev - scrollStep, 0));
-    };
-
-
-    if (sliderData.length === 0) return <p>Loading...</p>
 
     return (
-    <div className = {`${styles.container} ${styles.slideContainer}`}>
-        <div className= {styles.slideTitle}>{title}</div>
-        <div className = {styles.sliderRowWrapper}>
-            <button className = {`${styles.sliderArrow} ${styles.prevArrow}`} onClick={handlePrev}><i className="fas fa-caret-left"></i></button>
-                <div className = {styles.movieListContainer} style={{transform: `translateX(-${position * cardWidth}px)`}}>
-                    {sliderData.map((movie, index) => (
-                        <div key={movie.id} ref={index === 0 ? cardRef : null}>
-                            <Card movie={movie} route={`/main/view/${movie.id}`}/>
-                        </div>
+        <div className={styles.slideContainer}>
+            <h2 className={styles.slideTitle}>{title}</h2>
+            <div className={styles.sliderRowWrapper}>
+                <div ref={movieListRef} className={styles.movieListContainer}>
+                    {movies.map(movie => (
+                        <Card key={movie.id} movie={movie} />
                     ))}
                 </div>
-            <button className={`${styles.sliderArrow} ${styles.nextArrow}`} onClick={handleNext}><i className="fas fa-caret-right"></i></button>
+                <button className={`${styles.sliderArrow} ${styles.prevArrow}`} onClick={() => scroll('left')}>‹</button>
+                <button className={`${styles.sliderArrow} ${styles.nextArrow}`} onClick={() => scroll('right')}>›</button>
+            </div>
         </div>
-    </div>
     );
 }
-
-;

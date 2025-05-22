@@ -1,40 +1,57 @@
-'use client'
-import styles from "./styles/styles.module.css" 
+'use client';
+import Link from 'next/link';
+import styles from './styles/card.module.css';
 import { useFavorites } from '../context/FavoritesContext';
-import { useRouter } from "next/navigation";
 
-export default function Card({movie, hideAddButton=false, index}) {
-    const { addToFavorites } = useFavorites();
-    const router = useRouter();
+export default function Card({ movie }) {
+    const movieTitle = movie.title || movie.name || 'Untitled';
 
-    const handleNavigation = (id = index+1) => {
-      router.push(`./view/${id}`);
+    const imageUrl = movie.posterPath || movie.poster || '/placeholder-poster.jpg';
+    const movieId = movie.id || movie._id;
+
+    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+    const isMovieFavorite = isFavorite(movieId);
+
+    const stringMovieId = String(movieId);
+
+    const displayYear = movie.releaseDate
+        ? new Date(movie.releaseDate).getFullYear()
+        : (movie.first_air_date ? new Date(movie.first_air_date).getFullYear() : 'N/A');
+    const displayCategory = movie.mediaType === 'movie' ? 'Movie' : (movie.mediaType === 'tv' ? 'TV Show' : 'Unknown');
+
+    const handleFavoriteClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (isMovieFavorite) {
+            removeFavorite(movieId);
+        } else {
+            addFavorite(movie);
+        }
     };
 
-    const handleAddToFavorites = (e) => {
-      e.stopPropagation();
-      addToFavorites(movie);
-      alert(`${movie.title} нь дуртай жагсаалтад нэмэгдлээ!`);
-    };
-    
     return (
-    <div className = {styles.movieCard} style={{backgroundImage: `url(${movie.poster})`}} onClick={() => handleNavigation(movie.id)}>
-        <div className = {styles.cardContentContainer}>
-            <button 
-            className={styles.btnAddCard}
-            style={{opacity: hideAddButton ? 0 : 1}}
-            onClick={handleAddToFavorites}>
-            <i className="fas fa-plus"></i>
-            </button>
+        <Link
+            href={`/main/view/${stringMovieId}`}
+            className={styles.movieCard}
+            style={{ backgroundImage: `url(${imageUrl})` }}
+        >
+            <div className={styles.cardContentContainer}>
+                <button
+                    className={styles.btnAddCard}
+                    onClick={handleFavoriteClick}
+                >
+                    {isMovieFavorite ? '❤️' : '+'}
+                </button>
+
                 <div className={styles.cardContent}>
-                    <h4 className={styles.cardTitle}>{movie.title}</h4>
-                    <span className={styles.cardDescription}>
-                            <h6>{movie.category}</h6>
-                            <h6>{movie.duration + " мин"}</h6>
-                    </span>
+                    <h3 className={styles.cardTitle}>{movieTitle}</h3>
+                    <div className={styles.cardDescription}>
+                        <h6>{displayCategory}</h6>
+                        <h6>{displayYear}</h6>
+                    </div>
                 </div>
-        </div>
-    </div>
-    )
+            </div>
+        </Link>
+    );
 }
-;

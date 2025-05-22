@@ -1,126 +1,213 @@
+/* src/app/view/[id]/view.module.css */
+
+/* --- Existing styles for the Movie Details View (when player is not active) --- */
+/* These styles define the layout of the details card in the middle of the screen */
 .container{
     margin: auto;
-    padding: 200px 0;
+    padding: 200px 0; /* Provides space above and below the details card */
     display: flex;
-    width: 45%;
+    width: 45%; /* Makes the details card take up 45% of the container's width */
     align-items: center;
-    max-width: 1440px;
+    max-width: 1440px; /* Maximum width for the details container */
+    /* Consider adding min-width for smaller screens if 45% becomes too small */
 }
+
+/* Styles for the large background image behind the details */
 .viewBackground{
-    position: absolute;
+    position: absolute; /* Absolute positioning relative to the nearest positioned ancestor (likely the body or root layout div) */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(4px) brightness(0.4);
-    z-index: -1;
+    height: 100vh; /* Makes the background cover the full height of the viewport */
+    background-size: cover; /* Ensures the background image covers the entire area without distortion */
+    background-position: center; /* Centers the background image */
+    filter: blur(4px) brightness(0.4); /* Applies blur and darkens the background */
+    z-index: -1; /* Puts the background behind other content */
 }
+
+/* Styles for the smaller movie poster card within the details view */
 .viewCard{
-    width: 345px;
-    height: 400px;
-    border-radius: 14px;
-    background: no-repeat center/cover;
+    width: 345px; /* Fixed width for the poster card */
+    height: 400px; /* Fixed height for the poster card */
+    border-radius: 14px; /* Rounded corners */
+    background: no-repeat center/cover; /* Background image for the card */
+    /* Add a box-shadow for depth if desired */
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); */
 }
 
+/* Styles for the text content area next to the poster card in details view */
 .viewContent{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    width: 100%;
+    display: flex; /* Uses flexbox for layout of title, info, description, buttons */
+    align-items: flex-start; /* Aligns items to the start (left) */
+    flex-direction: column; /* Stacks children vertically */
+    padding: 20px; /* Padding around the content */
+    gap: 15px; /* Space between children (title, info, etc.) */
+    width: 100%; /* Takes up remaining width in the flex container */
     height: 100%;
 }
 
+/* Styles for the movie title */
 .viewTitle{
     font-size: 40px;
     font-weight: 600;
     color: #FDFDFF;
+    /* Add margin-bottom if gap isn't enough */
 }
 
+/* Styles for the row containing date/year and rating */
 .viewInfo{
-    display: flex;
-    align-items: center;
+    display: flex; /* Uses flexbox for layout of year and rating */
+    align-items: center; /* Vertically centers items */
+    /* Add gap if needed */
 }
 
-.viewDate{
-    font-size: 16px;
-    font-weight: 600;
+/* Styles for the movie date/year text */
+.viewDate{ /* This is displaying movie.year */
+    font-size: 14px;
     color: #b3b3b3;
-    margin-right: 15px;
+    margin-right: 15px; /* Space between year and rating */
 }
 
+/* Styles for the rating area */
 .viewRating{
     font-size: 14px;
-    color: #02BCB5;
+    color: #02BCB5; /* Greenish color */
 }
 
+/* Styles for the star icons within the rating */
 .viewRating i{
-    margin-right: 2px;
+    margin-right: 2px; /* Small space between stars */
 }
 
-.viewCategoryContainer{
-    display: flex;
-    gap: 7px;
-}
-
+/* Styles for the category tag */
 .viewCategory{
     font-size: 16px;
     color: #fdfdfd;
     border-radius: 3px;
     padding: 4px 8px;
-    background-color: #029E98; 
+    background-color: #029E98; /* Greenish background */
+    /* Ensure it displays as inline-block or block if needed */
+    display: inline-block; /* Or 'block' depending on layout */
 }
 
+/* Styles for the movie description text */
 .viewDescription{
-    text-align: justify;
+    text-align: justify; /* Justify text alignment */
     font-size: 20px;
     font-weight: 300;
     color: #FDFDFF;
-    
+    /* Add margin-bottom if needed */
 }
 
+/* Styles for the container holding the play and add buttons */
 .viewButtonContainer {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; /* Uses flexbox for button layout */
+    align-items: center; /* Vertically centers buttons */
+    gap: 12px; /* Space between buttons */
+    /* Add margin-top if needed to push buttons down */
 }
 
+/* Styles for the "ТОГЛУУЛАХ" (Play) button */
 .btnPlay {
     padding: 10px 25px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, opacity 0.3s ease;
-    display: inline-flex; 
-    align-items: center;
-    gap: 8px;
-    background-color: #029E98; 
-    font-size: 1rem;
+    display: inline-flex; /* Allows aligning icon and text */
+    align-items: center; /* Vertically centers icon and text */
+    gap: 8px; /* Space between icon and text */
+    background-color: #029E98; /* Greenish background */
+    font-size: 1rem; /* Standard font size */
     font-weight: bold;
-    color: #FDFDFF;
+    color: #FDFDFF; /* White text */
 }
 
 .btnPlay:hover {
-    background-color: #02BCB5; 
+    background-color: #02BCB5; /* Lighter greenish on hover */
 }
 
+/* Styles for the "+ ЖАГСААЛТ" (Add to List) button */
 .viewbtnAdd {
     padding: 10px 25px;
-    border: 2px solid  #029E98; 
+    border: 2px solid  #029E98; /* Greenish border */
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, opacity 0.3s ease;
-    display: inline-flex; 
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; /* Allows aligning icon and text */
+    align-items: center; /* Vertically centers icon and text */
+    gap: 8px; /* Space between icon and text */
+    background-color: transparent; /* Transparent background */
     font-size: 1rem;
     font-weight: 600;
-    color: #FDFDFF;
+    color: #FDFDFF; /* White text */
 }
 
 .viewbtnAdd:hover {
-    border-color: #02BCB5; 
+    border-color: #02BCB5; /* Lighter greenish border on hover */
+    /* Optional: background-color: rgba(2, 158, 152, 0.1); */
+}
+
+
+/* --- New/Modified Styles for the Player View (when player is active) --- */
+/* These styles apply when isPlaying is true and control the video/iframe layout */
+
+.playerContainer {
+    /* Position relative is useful if you need to layer elements inside (like captions, controls, or the removed back button) */
+    position: relative;
+    /* Makes the container take the full width of its parent up to a max limit */
+    width: 100%;
+    max-width: 1200px; /* Adjust this maximum width to control player size */
+    margin: 0 auto; /* Centers the player block horizontally */
+
+    /* crucial for maintaining the video's aspect ratio and preventing letterboxing/pillarboxing inside the container */
+    /* This sets the container's height automatically based on its width */
+    aspect-ratio: 16 / 9; /* Standard widescreen aspect ratio (1.777...) */
+    /* A common alternative is using padding-top: 56.25% (which is 9/16 * 100) */
+
+    /* Add top margin to push the player block down from the header */
+    /* Adjust this value based on your site's header height */
+    margin-top: 80px; /* Example: space below a fixed header */
+    margin-bottom: 20px; /* Space below the player */
+
+    background-color: black; /* Background color for the player area */
+
+    /* Optional: Add horizontal padding if the player should not touch screen edges */
+    /* padding: 0 10px; */
+    /* box-sizing: border-box; /* Ensures padding is included in the total width */
+
+    /* Remove flexbox/grid centering if you want the player to fill the space */
+    display: block; /* Standard block element behavior */
+}
+
+/* Styles for the actual <video> tag (used for local movies) */
+.videoPlayer {
+    width: 100%; /* Make the video fill the width of its parent container (.playerContainer) */
+    height: 100%; /* Make the video fill the height of its parent container */
+    display: block; /* Ensures the video element is treated as a block, helps with layout */
+    /* object-fit: cover; /* Use 'cover' to ensure video covers the area, potentially cropping edges if aspect ratios don't match exactly */
+    object-fit: fill; /* Use 'fill' to stretch the video to exactly fill the container, may distort aspect ratio */
+    /* object-fit: contain; /* Use 'contain' to ensure the whole video is visible, may add black bars if aspect ratios don't match */
+     /* 'contain' is often the most desirable for video players */
+     object-fit: contain; /* Changed to contain to avoid distortion */
+
+}
+
+/* Styles for the actual <iframe> tag (used for external embeds like Vidsrc) */
+.iframePlayer {
+     width: 100%; /* Make the iframe fill the width of its parent container (.playerContainer) */
+     height: 100%; /* Make the iframe fill the height of its parent container */
+     border: none; /* Remove the default iframe border */
+     display: block; /* Ensures the iframe element is treated as a block */
+}
+
+/* Removed .backButton styles as the button was removed from the JSX */
+
+/* Styles for the "Stream unavailable" message (if you added one) */
+.noStreamMessage {
+    color: #ccc;
+    font-size: 1.2em;
+    text-align: center;
+    /* If this is inside .playerContainer, it will be centered by the flex/grid from the previous version */
+    /* If not, you might need specific centering styles here */
 }

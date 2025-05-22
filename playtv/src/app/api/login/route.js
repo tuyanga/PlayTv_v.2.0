@@ -1,9 +1,9 @@
-import clientPromise from '@/lib/mongodb1'; // Import the shared MongoDB client
+import clientPromise from '@/lib/mongodb3';
 import bcrypt from 'bcrypt';
 
 export async function POST(req) {
   try {
-    const body = await req.json(); // Parse the JSON body
+    const body = await req.json();
     const { phoneNumber, password } = body;
 
     if (!phoneNumber || !password) {
@@ -13,12 +13,10 @@ export async function POST(req) {
       );
     }
 
-    // Get the MongoDB client and database
     const client = await clientPromise;
-    const db = client.db('playtv'); // Replace 'playtv' with your database name
-    const usersCollection = db.collection('users'); // Replace 'users' with your collection name
+    const db = client.db('playtv');
+    const usersCollection = db.collection('users');
 
-    // Check if the user exists in the database
     const user = await usersCollection.findOne({ phoneNumber });
     if (!user) {
       return new Response(
@@ -27,7 +25,6 @@ export async function POST(req) {
       );
     }
 
-    // Compare the provided password with the hashed password in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return new Response(
@@ -36,7 +33,6 @@ export async function POST(req) {
       );
     }
 
-    // If login is successful, return user data and a token
     return new Response(
       JSON.stringify({
         message: 'Login successful',
@@ -44,7 +40,7 @@ export async function POST(req) {
           name: user.name,
           phoneNumber: user.phoneNumber,
         },
-        token: 'fake-jwt-token', // Replace with a real JWT if needed
+        token: 'fake-jwt-token',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );

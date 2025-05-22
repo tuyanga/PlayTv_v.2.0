@@ -1,30 +1,22 @@
-'use client'
+'use client';
+
 import { useFavorites } from '../context/FavoritesContext';
+import Card from '../components/card';
 import styles from './styles.module.css';
-import Card from '../components/card_prox';
 
 export default function FavoritesPage() {
-  const { favorites, removeFromFavorites } = useFavorites();
+  const { favorites, removeFavorite } = useFavorites();
 
   return (
-    <div className={styles.favoritesContainer}>
-      <h1>Миний дуртай кинонууд</h1>
-      
+    <div className={styles.favoritesPageContainer}>
+      <h1 className={styles.pageTitle}>Миний Жагсаалт</h1>
+
       {favorites.length === 0 ? (
-        <p>Дуртай кино нэмээгүй байна</p>
+        <p className={styles.emptyMessage}>Таны жагсаалт хоосон байна.</p>
       ) : (
         <div className={styles.favoritesGrid}>
-          {favorites.map((movie) => (
-            <div key={movie.id} className={styles.favoriteItem}>
-              <Card movie={movie} hideAddButton={true} route={`/main/view/${movie.id}`}/>
-              <button 
-                onClick={() => removeFromFavorites(movie)}
-                className={styles.removeButton}
-                aria-label={`Remove ${movie.title} from favorites`}
-              >
-                <i className="fas fa-times"></i> Устгах
-              </button>
-            </div>
+          {favorites.map(movie => (
+            <Card key={movie.id || movie._id} movie={movie} />
           ))}
         </div>
       )}
