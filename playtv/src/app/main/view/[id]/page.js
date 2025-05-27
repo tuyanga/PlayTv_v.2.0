@@ -4,7 +4,7 @@ async function getMovie(id) {
 
   try {
 
-    const localRes = await fetch(`http://localhost:3000/api/movie/${id}`)
+    const localRes = await fetch(`http://localhost:3000/api/movies/${id}`, { method: 'GET' })
     if(localRes.ok){
       const localData = await localRes.json();
       if (localData) return localData;
@@ -37,19 +37,25 @@ export default async function ViewPage({ params }) {
   return (
       <div>
           <View {...movie}/>
-          {trailerID && trailerID.key && 
-          (<div style={{ marginTop: '0.5rem', display: 'flex', flexDirection:'column', justifyContent: "center", alignItems: "center"}}>
+          {(trailerID?.key || movie.trailer_path) && (
+          <div style={{ marginTop: '0.5rem', display: 'flex', flexDirection:'column', justifyContent: "center", alignItems: "center"}}>
             <div style = {{fontSize: '36px', marginBottom: '0.5rem', color: '#Fdfdff', fontWeight: '600'}}>Trailer</div>
             <iframe 
               width="50%"
               height="500"
-              src={`https://www.youtube.com/embed/${trailerID.key}`}
+              src={`https://www.youtube.com/embed/${trailerID?.key || extractYouTubeKey(movie.trailer_path)}`}
               title="Movie Trailer"
               style={{ border: "none" }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
-            </div>)}
+          </div>
+)}
+
       </div>
   );
+}
+function extractYouTubeKey(url) {
+  const match = url.match(/(?:\?v=|\/embed\/|\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
 }

@@ -25,7 +25,7 @@ export default function Header() {
                 <div className={styles.headerRightContainer}>
                     <div className={styles.userActions}>
                         <button onClick={() => handleNavigation('/main/search')}><i className="fas fa-search"></i></button>
-                        <button><i className="fas fa-bell"></i></button>
+            
                         <button onClick={() => handleNavigation('/main/settings')}><i className="fas fa-user"></i></button>
                     </div>
                 </div>

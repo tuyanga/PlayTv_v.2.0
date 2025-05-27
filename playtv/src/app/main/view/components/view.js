@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 export default function View(movie) {
     const [userPackage, setUserPackage] = useState(null);
     const router = useRouter();
-    const watchURL = `https://vidsrc.xyz/embed/movie/${movie.id}`;
+    
     const { addToFavorites } = useFavorites();
 
     // Хэрэглэгчийн идэвхтэй багц мэдээлэл авах
@@ -43,7 +43,10 @@ export default function View(movie) {
         addToFavorites(movie);
         alert(`${movie.title || movie.name} нь дуртай жагсаалтад нэмэгдлээ!`);
     };
-
+    
+    const watchURL = movie.video_path && movie.video_path.trim() !== ''
+        ? movie.video_path
+        : `https://vidsrc.xyz/embed/movie/${movie.id}`;
     // Тоглуулах
     const handlePlay = () => {
         if (!userPackage) {
@@ -74,22 +77,38 @@ export default function View(movie) {
 
     return(
         <div className={styles.container}>
-            <div className={styles.viewBackground} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`}}></div>
-            <div className={styles.viewCard} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}></div>
+            <div className={styles.viewBackground} style={{ backgroundImage: movie.poster_path
+                        ?`url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`: movie.image
+                            ? `url(${movie.image})`
+                            : 'none' }}></div>
+            <div
+                className={styles.viewCard}
+                style={{
+                    backgroundImage: movie.poster_path
+                        ? `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`
+                        : movie.image
+                            ? `url(${movie.image})`
+                            : 'none'
+                }}
+            ></div>
             <div className={styles.viewContent}>
                 <div className={styles.viewTitle}>{movie.title}</div>
                 <div className={styles.viewInfo}>
-                    <h2 className={styles.viewDate}>{movie.release_date}</h2>
-                    <Star rating={movie.vote_average} classname={styles.viewRating}/>
+                    <h2 className={styles.viewDate}>{movie.release_date||movie.year}</h2>
+                    <Star rating={movie.vote_average || movie.rating} classname={styles.viewRating}/>
                 </div>
                 <div className={styles.viewCategoryContainer}>
-                    {movie.genres && movie.genres.map((genre) => (
-                        <span key={genre.id} className={styles.viewCategory}>
-                            {genre.name}
-                        </span>
-                    ))}
+                    {movie.genres && movie.genres.length > 0 ? (
+                        movie.genres.map((genre) => (
+                            <span key={genre.id} className={styles.viewCategory}>
+                                {genre.name}
+                            </span>
+                        ))
+                    ) : (
+                        movie.category && <span className={styles.viewCategory}>{movie.category}</span>
+                    )}
                 </div>
-                <div className={styles.viewDescription}>{movie.overview}</div>
+                <div className={styles.viewDescription}>{movie.overview||movie.description}</div>
                 <div className={styles.viewButtonContainer}>
                     <button className={styles.btnPlay} onClick={handlePlay}><i className="fas fa-play"></i> ТОГЛУУЛАХ</button>
                     <button className={styles.viewbtnAdd} onClick={handleAddToFavorites}><i className="fas fa-plus"></i>ЖАГСААЛТ</button>    

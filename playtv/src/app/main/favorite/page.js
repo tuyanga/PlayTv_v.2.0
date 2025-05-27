@@ -15,8 +15,8 @@ export default function FavoritesPage() {
       ) : (
         <div className={styles.favoritesGrid}>
           {favorites.map((movie) => (
-            <div key={movie.id} className={styles.favoriteItem}>
-              <Card movie={movie} hideAddButton={true} route={`/main/view/${movie.id}`}/>
+            <div key={movie._id ? `custom-${movie._id}` : `api-${movie.id}`} className={styles.favoriteItem}>
+              <Card movie={movie} hideAddButton={true} route={`/main/view/${movie._id || movie.id}`}/>
               <button 
                 onClick={() => removeFromFavorites(movie)}
                 className={styles.removeButton}

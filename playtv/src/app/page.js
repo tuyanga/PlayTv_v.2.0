@@ -1,9 +1,16 @@
 'use client'; 
-import { useRouter } from 'next/navigation'; // useRouter hook-ийг импортлох
+import React from 'react';
+import { useRouter } from 'next/navigation';
 import styles from "./landing.module.css";
 
 export default function Landing() {
-  const router = useRouter(); // useRouter hook-ийг ашиглах
+  const router = useRouter();
+
+  const [phone, setPhone] = React.useState("");
+
+  const handleSignUp = () => {
+    router.push(`/auth/signup?phone=${encodeURIComponent(phone)}`);
+  };
 
   return (
     <div>
@@ -12,7 +19,7 @@ export default function Landing() {
           <div className={styles.logo}><a href="#">PlayTV</a></div>
           <button 
             className={styles.loginBtn} 
-            onClick={() => router.push('/auth/login')} // НЭВТРЭХ товчийг дарахад login хуудас руу шилжих
+            onClick={() => router.push('/auth/login')} 
           >
             НЭВТРЭХ
           </button>
@@ -34,13 +41,18 @@ export default function Landing() {
         </div>
         <div className={styles.btnContainer}>
           <a>ХЭРВЭЭ ТА БҮРТГҮҮЛЭХ БОЛ УТАСНЫ ДУГААРААР БҮРТГҮҮЛНЭ ҮҮ</a>
-          <div style={{ display: "flex", gap: "5px" }}>
+          <div style={{ display: "flex", gap: "5px" , marginTop: "20px" }}>
             <div className={styles.signUpBox}>
-              <input type="text" placeholder="Утасны дугаар" />
+              <input
+                type="text"
+                placeholder="Утасны дугаар"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+              />
             </div>
             <button 
               className={styles.signUpBtn} 
-              onClick={() => router.push('/auth/signup')} // БҮРТГҮҮЛЭХ товчийг дарахад signup хуудас руу шилжих
+              onClick={handleSignUp}
             >
               БҮРТГҮҮЛЭХ
             </button>
@@ -48,19 +60,19 @@ export default function Landing() {
         </div>
 
         <div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
 
-            <div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   );

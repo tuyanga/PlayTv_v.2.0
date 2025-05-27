@@ -7,8 +7,8 @@ export default function Card({movie, hideAddButton=false, index}) {
     const { addToFavorites } = useFavorites();
     const router = useRouter();
 
-    const handleNavigation = (id = index+1) => {
-      router.push(`./view/${id}`);
+    const handleNavigation = () => {
+      router.push(`./view/${movie._id}`);
     };
 
     const handleAddToFavorites = (e) => {

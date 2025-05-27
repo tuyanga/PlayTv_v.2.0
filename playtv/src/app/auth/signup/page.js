@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter , useSearchParams} from 'next/navigation';
+
 import Link from 'next/link';
+import { FaXmark } from 'react-icons/fa6';
 import styles from './signup.module.css'; // Import the CSS module
 
 export default function SignUpPage() {
+  const searchParams = useSearchParams();
   const [name, setName] = useState(''); // Added state for name
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    const phoneFromQuery = searchParams.get('phone');
+    if (phoneFromQuery) {
+      setPhoneNumber(phoneFromQuery);
+    }
+  }, [searchParams]);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -38,20 +48,21 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Sign Up</h2>
+    <div className={styles.container} style={{ position: 'relative' }}>
+      <FaXmark className={styles.closepopup} style={{ position: 'absolute', top: 10, right: 10 }} onClick={() => router.push('/')}/>
+      <h2 className={styles.title}>Бүртгүүлэх</h2>
       <form onSubmit={handleSignUp} className={styles.form}>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Нэр"
           value={name}
           required
-          onChange={(e) => setName(e.target.value)} // Update name state
+          onChange={(e) => setName(e.target.value)}
           className={styles.input}
         />
         <input
           type="text"
-          placeholder="Phone Number"
+          placeholder="Утасны дугаар"
           value={phoneNumber}
           required
           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -59,7 +70,7 @@ export default function SignUpPage() {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Нууц үг"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
@@ -67,17 +78,17 @@ export default function SignUpPage() {
         />
         <input
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Нууц үг давтах"
           value={confirmPassword}
           required
           onChange={(e) => setConfirmPassword(e.target.value)}
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
-          Sign Up
+          Бүртгүүлэх
         </button>
-        <p>
-          Already have an account? <Link href="/auth/login">Login</Link>
+        <p className={styles.signuplink}>
+          Аль хэдийн бүртгэлтэй юу? <Link href="/auth/login">Нэвтрэх</Link>
         </p>
       </form>
       {message && <p className={styles.message}>{message}</p>}

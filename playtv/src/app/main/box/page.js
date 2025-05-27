@@ -7,8 +7,7 @@ export default function Home() {
 
   return (
     <div>
-      <Carousel/>
-      <section>
+      <section style={{ marginTop: "50px" }}>
       <Slider title="Шинээр нэмэгдсэн"/>
       </section>
     </div>

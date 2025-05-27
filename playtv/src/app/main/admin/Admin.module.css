@@ -2,14 +2,15 @@
   
   display: flex;
   gap: 32px;
-  align-items: flex-start;
+  justify-content: center;
   margin-top: 30px;
   width: 100%;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #121212;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color:white
 }
 
 .title {
@@ -17,20 +18,21 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 }
 
 .subtitle {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #555;
+  color: white;
 }
 
 .formContainer {
   padding: 20px;
-  background-color: #fff;
+  background-color: #172630;
   border-radius: 8px;
+  width: 25rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -43,7 +45,7 @@
 .input {
   padding: 10px;
   font-size: 14px;
-  color: #333; /* Бичиж буй текстийн өнгө */
+  color: white; /* Бичиж буй текстийн өнгө */
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
@@ -51,18 +53,18 @@
 }
 
 .input:focus {
-  border-color: #007bff;
+  border-color: #02BCB5; 
 }
 
 .input::placeholder {
-  color: #aaa; /* Placeholder текстийн өнгө */
-  font-style: italic; /* Placeholder текстийг налуу болгох */
+  color: #aaa; 
+  font-style: italic;
 }
 
 .textarea {
   padding: 10px;
   font-size: 14px;
-  color: #333; /* Бичиж буй текстийн өнгө */
+  color: white; /* Бичиж буй текстийн өнгө */
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
@@ -71,7 +73,7 @@
 }
 
 .textarea:focus {
-  border-color: #007bff;
+  border-color: #02BCB5;
 }
 
 .textarea::placeholder {
@@ -84,7 +86,7 @@
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
+  background-color: #02BCB5;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -92,7 +94,8 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background: white;
+  color: #02BCB5;
 }
 
 .message {
@@ -105,11 +108,17 @@
 .tableWrapper {
   overflow-x: auto;
   margin-top: 16px;
+  width: 50rem;
+  
+}
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
 }
 .movieTable {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
+  background-color: #17263070;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 .movieTable th, .movieTable td {
@@ -118,7 +127,7 @@
   text-align: center;
 }
 .movieTable th {
-  background: #f5f5f5;
+  background-color: #172630;
   font-weight: 600;
 }
 .posterImg {
@@ -133,11 +142,12 @@
   padding: 4px 10px;
   border: none;
   border-radius: 4px;
-  background: #1976d2;
+  background: #02BCB5;
   color: #fff;
   cursor: pointer;
   transition: background 0.2s;
 }
 .actionBtn:hover {
-  background: #1565c0;
+  background: white;
+  color: #02BCB5;
 }

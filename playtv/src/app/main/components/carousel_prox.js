@@ -60,12 +60,24 @@ export default function Carousel() {
 
         const current = carouselData[currentIndex];
         e.stopPropagation();
-        addToFavorites({
-            title: current.title,
-            category: current.category || '',
-            duration: current.duration || '',
-            poster: current.image
-        });
+  addToFavorites({
+    id: current.id,
+    title: current.title,
+    category: current.genre_ids?.join(', ') || 'Төрөл үл мэдэгдсэн',
+    release_date: current.release_date,
+    poster_path: current.poster_path ,
+    vote_average: current.vote_average || 0
+  });
+
+  console.log('addToFavorites movie:', {
+    id: current.id,
+    title: current.title,
+    category: current.genre_ids?.join(', ') || 'Төрөл үл мэдэгдсэн',
+    release_date: current.release_date,
+    poster_path: current.poster_path,
+    vote_average : current.vote_average || 0
+  });
+
         alert(`${current.title} нь дуртай жагсаалтад нэмэгдлээ!`);
   };
     

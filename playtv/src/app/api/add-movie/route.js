@@ -15,6 +15,8 @@ export async function POST(request) {
       description: body.description,
       image: body.image,
       poster: body.poster,
+      video_path: body.video_path,
+      trailer_path: body.trailer_path,
     });
 
     return Response.json({ success: true, movie: newMovie });

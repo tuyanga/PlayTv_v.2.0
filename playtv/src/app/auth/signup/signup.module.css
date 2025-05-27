@@ -1,18 +1,18 @@
 .container {
   max-width: 400px;
-  margin: 100px auto;
+  margin: 200px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background: #07131c;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #333;
+  color: #ccc;
 }
 
 .title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #444;
+  color: #ccc;
 }
 
 .form {
@@ -24,7 +24,10 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #838383;
+  border-radius: 5px;
+  background-color: #172630;
+  color: white;
   border-radius: 4px;
   font-size: 16px;
 }
@@ -32,7 +35,7 @@
 .button {
   width: 100%;
   padding: 10px;
-  background-color: #28a745;
+  background-color: #02BCB5;
   color: white;
   border: none;
   border-radius: 4px;
@@ -42,9 +45,13 @@
 }
 
 .button:hover {
-  background-color: #218838;
+  background-color: white;
+  color: #02BCB5;
 }
-
+.signuplink{
+    color: #ccc;
+    margin-top: 10px;
+  }
 .message {
   margin-top: 15px;
   font-size: 14px;

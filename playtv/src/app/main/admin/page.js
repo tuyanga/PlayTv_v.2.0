@@ -12,10 +12,12 @@ export default function AdminPage() {
     description: '',
     image: '',
     poster: '',
+    video_path: '',
+    trailer_path: '',
   });
   const [message, setMessage] = useState('');
   const [movies, setMovies] = useState([]);
-  const [editId, setEditId] = useState(null); // Шинэ state: edit mode
+  const [editId, setEditId] = useState(null); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +38,7 @@ export default function AdminPage() {
       if (response.ok) {
         setMessage('Кино амжилттай нэмэгдлээ!');
         setNewMovie({
+          
           title: '',
           category: '',
           duration: '',
@@ -44,6 +47,8 @@ export default function AdminPage() {
           description: '',
           image: '',
           poster: '',
+          video_path: '',
+          trailer_path: '',
         });
         await fetchMovies();
       } else {
@@ -77,6 +82,8 @@ export default function AdminPage() {
           description: '',
           image: '',
           poster: '',
+          video_path: '',
+          trailer_path: '',
         });
         setEditId(null);
         await fetchMovies();
@@ -120,6 +127,8 @@ export default function AdminPage() {
       description: movie.description || '',
       image: movie.image || '',
       poster: movie.poster || '',
+      video_path: movie.video_path || '',
+      trailer_path: movie.trailer_path || '',
     });
     setEditId(movie._id);
     window.scrollTo({ top: 0, behavior: 'smooth' }); // form руу автоматаар гүйлгэнэ
@@ -131,11 +140,12 @@ export default function AdminPage() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.sectionWrapper}>
       <h1 className={styles.title}>Админ хэсэг</h1>
       <div className={styles.formContainer}>
         <h2 className={styles.subtitle}>{editId ? 'Кино засах' : 'Кино нэмэх'}</h2>
         <form className={styles.form} onSubmit={e => e.preventDefault()}>
-          {/* ...input fields... */}
+         
           <input
             type="text"
             name="title"
@@ -200,6 +210,22 @@ export default function AdminPage() {
             onChange={handleChange}
             className={styles.input}
           />
+          <input
+            type="text"
+            name="video_path"
+            placeholder="Киноны зам"
+            value={newMovie.video_path}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <input
+            type="text"
+            name="trailer_path"
+            placeholder="Трейлерын зам"
+            value={newMovie.trailer_path}
+            onChange={handleChange}
+            className={styles.input}
+          />
           <button
             type="button"
             onClick={editId ? handleUpdateMovie : handleAddMovie}
@@ -211,7 +237,7 @@ export default function AdminPage() {
             <button
               type="button"
               className={styles.button}
-              style={{ background: '#888', marginLeft: 8 }}
+              style={{ background: '#888'}}
               onClick={() => {
                 setEditId(null);
                 setNewMovie({
@@ -223,6 +249,8 @@ export default function AdminPage() {
                   description: '',
                   image: '',
                   poster: '',
+                  video_path  : '',
+                  trailer_path: '',
                 });
               }}
             >
@@ -232,8 +260,9 @@ export default function AdminPage() {
         </form>
         {message && <p className={styles.message}>{message}</p>}
       </div>
-
-      <h2>Нэмэгдсэн кинонууд</h2>
+      </div>
+<div className={styles.sectionWrapper}>
+      <h2 className={styles.title}>Нэмэгдсэн кинонууд</h2>
       <div className={styles.tableWrapper}>
         <table className={styles.movieTable}>
           <thead>
@@ -270,6 +299,7 @@ export default function AdminPage() {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );
